@@ -1,5 +1,4 @@
 ---
-name: Lazy Days
 
 colors:
   background: "#faf8f5"

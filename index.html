@@ -1,1 +1,67 @@
-<p>Hello World</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board Game Filter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__gradient"></div>
+    <div class="ambient__blob ambient__blob--peach"></div>
+    <div class="ambient__blob ambient__blob--sky"></div>
+    <div class="ambient__blob ambient__blob--sage"></div>
+    <div class="ambient__blob ambient__blob--blush"></div>
+    <div class="ambient__blob ambient__blob--butter"></div>
+    <div class="ambient__blob ambient__blob--peach2"></div>
+  </div>
+
+  <div class="page">
+    <header class="hero">
+      <div class="hero__badge">
+        <span class="hero__dot"></span>
+        <span>Lazy afternoon edition</span>
+      </div>
+      <h1 class="hero__title">Find a game for your <em class="hero__accent">mood</em></h1>
+      <p class="hero__subtitle">Filter by players, time, subjects, and soft skills — then pick something that fits the table tonight.</p>
+    </header>
+
+    <section class="toolbar" aria-label="Search and filters">
+      <div class="search-bar">
+        <svg class="search-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="search" id="search-input" class="search-bar__input" placeholder="Search by name, trait, or subject…" autocomplete="off">
+        <button type="button" id="reset-all" class="search-bar__reset hidden">Reset filters</button>
+      </div>
+
+      <div class="filters" id="filters"></div>
+    </section>
+
+    <section class="results">
+      <div class="results__header">
+        <h2 class="results__title">Games</h2>
+        <span id="result-count" class="results__count">0 games</span>
+      </div>
+      <div id="game-grid" class="game-grid"></div>
+      <div id="empty-state" class="empty-state hidden">
+        <span class="empty-state__emoji" aria-hidden="true">🎲</span>
+        <p class="empty-state__title">No games match right now</p>
+        <p class="empty-state__text">Try loosening a filter or clearing your search — there's always another mood.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Board Game Filter — sample data for demo purposes</p>
+    </footer>
+  </div>
+
+  <!-- Optional: set your BGG API token (register at https://boardgamegeek.com/applications) -->
+  <!-- <script>window.BGG_API_TOKEN = "your-token-here";</script> -->
+  <script type="module" src="index.js"></script>
+</body>
+</html>
