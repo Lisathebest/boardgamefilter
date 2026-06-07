@@ -1,4 +1,4 @@
-export const GAMES = [
+const GAMES = [
   {
     id: "things-in-rings",
     name: "Things in Rings",
@@ -9,7 +9,8 @@ export const GAMES = [
       "Forces players to dynamically deduce hidden sorting rules, training rule-based induction and mental flexibility.",
     players: "2-6",
     duration: "15-20 min",
-    bggScore: 7.2,
+    minAge: 8,
+    targetStages: ["Lower Elementary", "Upper Elementary"],
     bggId: "284984",
   },
   {
@@ -22,7 +23,8 @@ export const GAMES = [
       "Forces players to interpret and connect unrelated abstract images and words, serving as a powerful exercise for creative writing and metaphor comprehension.",
     players: "3-8",
     duration: "30 min",
-    bggScore: 7.2,
+    minAge: 8,
+    targetStages: ["Preschool", "Lower Elementary", "Upper Elementary", "Secondary & Adult"],
     bggId: "39856",
   },
   {
@@ -35,7 +37,8 @@ export const GAMES = [
       "Features dynamic, unpredictable stimuli combined with time-pressured responses. This rapid, rule-based inhibition forces players to control impulses under pressure, acutely improving inhibitory control (even beneficial for children with ADHD).",
     players: "2-8",
     duration: "15 min",
-    bggScore: 6.6,
+    minAge: 6,
+    targetStages: ["Preschool", "Lower Elementary"],
     bggId: "65984",
   },
   {
@@ -48,7 +51,8 @@ export const GAMES = [
       "Requires players to quickly process conflicting visual cues (color vs. item) and suppress the impulsive urge to grab the wrong item, sharply training cognitive flexibility.",
     players: "2-8",
     duration: "10-20 min",
-    bggScore: 6.8,
+    minAge: 8,
+    targetStages: ["Preschool", "Lower Elementary", "Upper Elementary"],
     bggId: "83195",
   },
   {
@@ -61,7 +65,8 @@ export const GAMES = [
       "Simulates a highly realistic scenario where players must balance personal/financial growth against the ecological collapse of the entire group ecosystem, fostering tangible civic awareness.",
     players: "3-4",
     duration: "60-90 min",
-    bggScore: 7.1,
+    minAge: 10,
+    targetStages: ["Upper Elementary", "Secondary & Adult"],
     bggId: "111619",
   },
 ];

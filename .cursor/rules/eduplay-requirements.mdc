@@ -1,0 +1,40 @@
+---
+description: Non-negotiable EduPlay Selector product and data requirements
+alwaysApply: true
+---
+
+# EduPlay Selector — Strict Requirements
+
+Read `REQUIREMENTS.md` for full detail. These rules are mandatory on every change.
+
+## Product
+- K–12 educator tool (**EduPlay Selector**), not a hobbyist BGG catalog
+- Two views only: **Game Selector** + **Inspiration** (global sticky navbar always visible)
+
+## Data (`gamesData.js`)
+Required fields: `id`, `name`, `subjects[]`, `softSkills[]`, `pedagogicalTrait`, `researchNote`, `players`, `duration`, `bggId`
+- `bggId` = cover image lookup only
+- **Never add or display `bggScore`** — remove if present
+- No BGG weight/rank/mechanism/theme fields unless explicitly approved
+- as i add information in game data, make sure to update all the time to game selector UI
+
+## Game Selector UI
+- Card tagline = `pedagogicalTrait`
+- Meta = `players` + `duration` only
+- Tags = about 2 subjects + 2 soft skills
+- Filters = players, time, subjects, soft skills, min age
+- Card tags include `minAge` pill (e.g. 8+); `targetStages` shown only in bottom Targets line
+- **No BGG scores, ratings, ranks, or weight badges in UI**
+- never volunteerly delete text from gameData.js unless I @ it
+
+## Inspiration page
+- Keep all in-text citations intact
+- Bold: **Reveal-and-React**, **Inhibitory Control**, **Microworlds**
+- Semantic `<article>` / `<section>` structure; responsive
+
+## Design (`design.md`)
+- Pill-shaped controls, rounded-3xl cards, warm OKLCH palette, ambient blur background
+
+## Technical
+- Hash router: `#/` and `#/inspiration`
+- Never commit `BGG_API_TOKEN`

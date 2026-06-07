@@ -1,6 +1,3 @@
-import { GAMES } from "./gamesData.js";
-import { preloadBggImages } from "./bggApi.js";
-
 const TINTS = ["peach", "sky", "sage", "butter", "blush"];
 
 const SUBJECT_EMOJI = {
@@ -13,6 +10,13 @@ const SUBJECT_EMOJI = {
   Economics: "💰",
   "Environmental Science": "🌿",
 };
+
+const ALL_TARGET_STAGES = [
+  "Preschool",
+  "Lower Elementary",
+  "Upper Elementary",
+  "Secondary & Adult",
+];
 
 function uniqueSorted(values) {
   return [...new Set(values)].sort();
@@ -53,6 +57,17 @@ const FILTER_CONFIG = {
     placeholder: "Any skills",
     options: buildOptions(uniqueSorted(GAMES.flatMap((g) => g.softSkills))),
   },
+  minAge: {
+    label: "Min age",
+    placeholder: "Any age",
+    options: [
+      { value: "6", label: "6+" },
+      { value: "8", label: "8+" },
+      { value: "10", label: "10+" },
+      { value: "12", label: "12+" },
+      { value: "14", label: "14+" },
+    ],
+  },
 };
 
 const state = {
@@ -62,14 +77,14 @@ const state = {
 
 const bggImages = new Map();
 
-const searchInput = document.getElementById("search-input");
-const resetAllBtn = document.getElementById("reset-all");
-const filtersContainer = document.getElementById("filters");
-const gameGrid = document.getElementById("game-grid");
-const resultCount = document.getElementById("result-count");
-const emptyState = document.getElementById("empty-state");
-
+let searchInput;
+let resetAllBtn;
+let filtersContainer;
+let gameGrid;
+let resultCount;
+let emptyState;
 let openFilterKey = null;
+let initialized = false;
 
 function parsePlayers(players) {
   const range = players.match(/^(\d+)-(\d+)$/);
@@ -121,6 +136,12 @@ function matchesSet(gameValues, selected) {
   return [...selected].some((value) => gameValues.includes(value));
 }
 
+function matchesMinAge(game, selected) {
+  if (selected.size === 0) return true;
+  if (game.minAge == null) return false;
+  return [...selected].some((value) => game.minAge <= Number(value));
+}
+
 function filterGames() {
   const search = state.search.trim().toLowerCase();
 
@@ -132,6 +153,8 @@ function filterGames() {
         game.researchNote,
         ...game.subjects,
         ...game.softSkills,
+        ...(game.targetStages ?? []),
+        game.minAge != null ? `${game.minAge}+` : "",
       ]
         .join(" ")
         .toLowerCase();
@@ -146,6 +169,7 @@ function filterGames() {
 
     if (!matchesSet(game.subjects, state.filters.subjects)) return false;
     if (!matchesSet(game.softSkills, state.filters.softSkills)) return false;
+    if (!matchesMinAge(game, state.filters.minAge)) return false;
     return true;
   });
 }
@@ -153,6 +177,138 @@ function filterGames() {
 function hasActiveFilters() {
   if (state.search.trim()) return true;
   return Object.values(state.filters).some((set) => set.size > 0);
+}
+
+// --- Game card presentation ---
+
+const STAGE_SHORT_LABELS = {
+  Preschool: "Preschool",
+  "Lower Elementary": "Lower Elem.",
+  "Upper Elementary": "Upper Elem.",
+  "Secondary & Adult": "Secondary+",
+};
+
+function formatTargetStagesSummary(stages) {
+  if (!stages?.length) return null;
+
+  const unique = [...new Set(stages)];
+  const ordered = ALL_TARGET_STAGES.filter((s) => unique.includes(s));
+
+  if (ordered.length === 0) return unique.join(", ");
+
+  const hasAll = ALL_TARGET_STAGES.every((s) => ordered.includes(s));
+  if (hasAll) return "All Ages / Universal";
+
+  if (ordered.length === 1) return ordered[0];
+
+  const indices = ordered.map((s) => ALL_TARGET_STAGES.indexOf(s));
+  const isContiguous = indices.every((idx, i) => i === 0 || idx === indices[i - 1] + 1);
+
+  if (isContiguous && ordered.length >= 2) {
+    if (ordered[0] === "Preschool" && ordered[ordered.length - 1] === "Upper Elementary") {
+      return "Preschool – Elementary";
+    }
+    if (ordered[0] === "Lower Elementary" && ordered[ordered.length - 1] === "Upper Elementary") {
+      return "K–6th Grade";
+    }
+    if (ordered[0] === "Preschool" && ordered[ordered.length - 1] === "Lower Elementary") {
+      return "Preschool – Lower Elem.";
+    }
+    return `${STAGE_SHORT_LABELS[ordered[0]] ?? ordered[0]} – ${STAGE_SHORT_LABELS[ordered[ordered.length - 1]] ?? ordered[ordered.length - 1]}`;
+  }
+
+  if (ordered.length <= 3) {
+    return ordered.map((s) => STAGE_SHORT_LABELS[s] ?? s).join(", ");
+  }
+
+  return `${STAGE_SHORT_LABELS[ordered[0]] ?? ordered[0]} – ${STAGE_SHORT_LABELS[ordered[ordered.length - 1]] ?? ordered[ordered.length - 1]}`;
+}
+
+function summarizeTags(items, maxVisible = 2) {
+  if (!items?.length) return { visible: [], overflow: 0 };
+  const visible = items.slice(0, maxVisible);
+  const overflow = Math.max(0, items.length - maxVisible);
+  return { visible, overflow };
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderTagPills(items, variant, overflow = 0) {
+  const pills = items.map(
+    (label) => `<span class="tag tag--${variant}">${escapeHtml(label)}</span>`
+  );
+  if (overflow > 0) {
+    pills.push(
+      `<span class="tag tag--overflow" title="${overflow} more not shown">+${overflow}</span>`
+    );
+  }
+  return pills.join("");
+}
+
+function buildGameCardView(game) {
+  const subjects = summarizeTags(game.subjects, 2);
+  const softSkills = summarizeTags(game.softSkills, 2);
+  const targetsSummary = formatTargetStagesSummary(game.targetStages);
+
+  const fullSubjects = (game.subjects ?? []).join(", ");
+  const fullSkills = (game.softSkills ?? []).join(", ");
+
+  const tagsAriaLabel = [
+    fullSubjects && `Subjects: ${fullSubjects}`,
+    fullSkills && `Soft skills: ${fullSkills}`,
+  ]
+    .filter(Boolean)
+    .join(". ");
+
+  return { subjects, softSkills, targetsSummary, tagsAriaLabel };
+}
+
+function renderGameCard(game, tint) {
+  const view = buildGameCardView(game);
+
+  const targetsLine = view.targetsSummary
+    ? `<p class="game-card__targets"><span class="game-card__targets-label">Targets:</span> ${escapeHtml(view.targetsSummary)}</p>`
+    : "";
+
+  return `
+    <article
+      class="game-card"
+      data-game-id="${escapeHtml(game.id)}"
+      tabindex="0"
+      role="button"
+      aria-label="${escapeHtml(game.name)}. ${escapeHtml(game.pedagogicalTrait)}."
+    >
+      <div class="game-card__image game-card__image--${tint}">
+        ${renderCardImage(game)}
+      </div>
+      <div class="game-card__body">
+        <h3 class="game-card__title">${escapeHtml(game.name)}</h3>
+        <p class="game-card__tagline">${escapeHtml(game.pedagogicalTrait)}</p>
+        <div class="game-card__meta">
+          <span class="game-card__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            ${escapeHtml(game.players)}
+          </span>
+          <span class="game-card__meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ${escapeHtml(game.duration)}
+          </span>
+        </div>
+        <div class="game-card__tags" aria-label="${escapeHtml(view.tagsAriaLabel)}">
+          ${game.minAge != null ? `<span class="tag tag--age">${escapeHtml(game.minAge)}+</span>` : ""}
+          ${renderTagPills(view.subjects.visible, "filled", view.subjects.overflow)}
+          ${renderTagPills(view.softSkills.visible, "outline", view.softSkills.overflow)}
+        </div>
+        ${targetsLine}
+      </div>
+    </article>
+  `;
 }
 
 function renderCardImage(game) {
@@ -266,38 +422,7 @@ function renderFilters() {
 
 function renderGames(games) {
   gameGrid.innerHTML = games
-    .map((game, index) => {
-      const tint = TINTS[index % TINTS.length];
-      const subjects = game.subjects.slice(0, 2);
-      const skills = game.softSkills.slice(0, 2);
-
-      return `
-        <article class="game-card">
-          <div class="game-card__image game-card__image--${tint}">
-            ${renderCardImage(game)}
-            <span class="game-card__weight">BGG ${game.bggScore}</span>
-          </div>
-          <div class="game-card__body">
-            <h3 class="game-card__title">${game.name}</h3>
-            <p class="game-card__tagline">${game.pedagogicalTrait}</p>
-            <div class="game-card__meta">
-              <span class="game-card__meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                ${game.players}
-              </span>
-              <span class="game-card__meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                ${game.duration}
-              </span>
-            </div>
-            <div class="game-card__tags">
-              ${subjects.map((s) => `<span class="tag tag--filled">${s}</span>`).join("")}
-              ${skills.map((s) => `<span class="tag tag--outline">${s}</span>`).join("")}
-            </div>
-          </div>
-        </article>
-      `;
-    })
+    .map((game, index) => renderGameCard(game, TINTS[index % TINTS.length]))
     .join("");
 
   attachCoverHandlers();
@@ -309,6 +434,7 @@ function renderGames(games) {
 }
 
 function update() {
+  if (!initialized) return;
   renderFilters();
   renderGames(filterGames());
   resetAllBtn.classList.toggle("hidden", !hasActiveFilters());
@@ -328,51 +454,63 @@ async function loadBggImages() {
   update();
 }
 
-searchInput.addEventListener("input", (e) => {
-  state.search = e.target.value;
+function initGameSelector() {
+  if (initialized) return;
+
+  searchInput = document.getElementById("search-input");
+  resetAllBtn = document.getElementById("reset-all");
+  filtersContainer = document.getElementById("filters");
+  gameGrid = document.getElementById("game-grid");
+  resultCount = document.getElementById("result-count");
+  emptyState = document.getElementById("empty-state");
+
+  searchInput.addEventListener("input", (e) => {
+    state.search = e.target.value;
+    update();
+  });
+
+  resetAllBtn.addEventListener("click", resetAll);
+
+  filtersContainer.addEventListener("click", (e) => {
+    const clearBtn = e.target.closest("[data-clear-filter]");
+    if (clearBtn) {
+      e.stopPropagation();
+      const key = clearBtn.dataset.clearFilter;
+      state.filters[key].clear();
+      closeAllPopovers();
+      update();
+      return;
+    }
+
+    const optionBtn = e.target.closest("[data-filter-value]");
+    if (optionBtn) {
+      const key = optionBtn.dataset.filterKey;
+      const value = optionBtn.dataset.filterValue;
+      const set = state.filters[key];
+      if (set.has(value)) set.delete(value);
+      else set.add(value);
+      update();
+      const trigger = filtersContainer.querySelector(`[data-filter="${key}"] .filter__trigger`);
+      if (trigger) togglePopover(key, trigger);
+      return;
+    }
+
+    const trigger = e.target.closest(".filter__trigger");
+    if (trigger) {
+      const key = trigger.closest(".filter").dataset.filter;
+      togglePopover(key, trigger);
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".filter")) closeAllPopovers();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAllPopovers();
+  });
+
+  initialized = true;
   update();
-});
-
-resetAllBtn.addEventListener("click", resetAll);
-
-filtersContainer.addEventListener("click", (e) => {
-  const clearBtn = e.target.closest("[data-clear-filter]");
-  if (clearBtn) {
-    e.stopPropagation();
-    const key = clearBtn.dataset.clearFilter;
-    state.filters[key].clear();
-    closeAllPopovers();
-    update();
-    return;
-  }
-
-  const optionBtn = e.target.closest("[data-filter-value]");
-  if (optionBtn) {
-    const key = optionBtn.dataset.filterKey;
-    const value = optionBtn.dataset.filterValue;
-    const set = state.filters[key];
-    if (set.has(value)) set.delete(value);
-    else set.add(value);
-    update();
-    const trigger = filtersContainer.querySelector(`[data-filter="${key}"] .filter__trigger`);
-    if (trigger) togglePopover(key, trigger);
-    return;
-  }
-
-  const trigger = e.target.closest(".filter__trigger");
-  if (trigger) {
-    const key = trigger.closest(".filter").dataset.filter;
-    togglePopover(key, trigger);
-  }
-});
-
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".filter")) closeAllPopovers();
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeAllPopovers();
-});
-
-update();
-loadBggImages();
+  loadBggImages();
+}

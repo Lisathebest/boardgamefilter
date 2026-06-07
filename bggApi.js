@@ -8,7 +8,7 @@ const imageCache = new Map();
  * @param {string} xmlText - Raw XML from /thing?id=
  * @returns {{ image: string | null, thumbnail: string | null }}
  */
-export function parseBggThingXml(xmlText) {
+function parseBggThingXml(xmlText) {
   const doc = new DOMParser().parseFromString(xmlText, "text/xml");
 
   if (doc.querySelector("parsererror")) {
@@ -37,7 +37,7 @@ export function parseBggThingXml(xmlText) {
  * @param {{ token?: string, signal?: AbortSignal }} [options]
  * @returns {Promise<{ image: string | null, thumbnail: string | null, imageUrl: string | null }>}
  */
-export async function fetchBggThing(bggId, options = {}) {
+async function fetchBggThing(bggId, options = {}) {
   const id = String(bggId);
   const cached = imageCache.get(id);
   if (cached) return cached;
@@ -71,7 +71,7 @@ export async function fetchBggThing(bggId, options = {}) {
  * @param {{ token?: string, signal?: AbortSignal }} [options]
  * @returns {Promise<string | null>}
  */
-export async function fetchBggImageUrl(bggId, options = {}) {
+async function fetchBggImageUrl(bggId, options = {}) {
   const { imageUrl } = await fetchBggThing(bggId, options);
   return imageUrl;
 }
@@ -83,7 +83,7 @@ export async function fetchBggImageUrl(bggId, options = {}) {
  * @param {{ token?: string }} [options]
  * @returns {Promise<Map<string, string>>}
  */
-export async function preloadBggImages(games, options = {}) {
+async function preloadBggImages(games, options = {}) {
   const results = new Map();
 
   await Promise.all(

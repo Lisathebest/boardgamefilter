@@ -28,7 +28,7 @@ colors:
 
 typography:
   display:
-    fontFamily: "Syne, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "DM Sans, ui-sans-serif, system-ui, sans-serif"
     fontWeight: 700
     letterSpacing: "-0.02em"
   body:
@@ -100,7 +100,7 @@ The page uses a fixed, full-viewport ambient layer behind all content:
 
 ## Typography
 
-- **Display / Headlines**: **Syne** (weights 400, 600, 700, 800). Used for H1–H4 and any large statement text. Tight letter-spacing (`-0.02em`).
+- **Display / Headlines**: **DM Sans** (weights 400, 500, 600, 700). Used for H1–H4 and any large statement text. Tight letter-spacing (`-0.02em`).
 - **Body / UI**: **Plus Jakarta Sans** (weights 400, 500, 600, 700). Used for all body text, labels, buttons, and metadata.
 
 ### Type scale

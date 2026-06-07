@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Board Game Filter</title>
+  <title>EduPlay Selector</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['DM Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
   <link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body class="font-body">
   <div class="ambient" aria-hidden="true">
     <div class="ambient__gradient"></div>
     <div class="ambient__blob ambient__blob--peach"></div>
@@ -20,14 +33,49 @@
     <div class="ambient__blob ambient__blob--peach2"></div>
   </div>
 
-  <div class="page">
+  <nav
+    id="global-nav"
+    class="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-lg"
+    aria-label="Global navigation"
+  >
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4">
+      <a
+        href="#/"
+        class="font-display text-lg font-bold tracking-tight text-slate-900 transition-colors hover:text-indigo-700 sm:text-xl"
+      >
+        EduPlay Selector
+      </a>
+      <div class="flex items-center gap-1 rounded-full border border-slate-200 bg-white/70 p-1 backdrop-blur-md" role="tablist" aria-label="Main navigation">
+        <a
+          href="#/"
+          role="tab"
+          data-route="selector"
+          aria-selected="true"
+          class="rounded-full px-3 py-2 text-sm font-medium transition-all sm:px-5 bg-indigo-600 text-white shadow-sm"
+        >
+          Game Selector
+        </a>
+        <a
+          href="#/inspiration"
+          role="tab"
+          data-route="inspiration"
+          aria-selected="false"
+          class="rounded-full px-3 py-2 text-sm font-medium transition-all sm:px-5 text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+        >
+          Inspiration
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="view-selector" class="page">
     <header class="hero">
       <div class="hero__badge">
         <span class="hero__dot"></span>
-        <span>Lazy afternoon edition</span>
+        <span>K–12 Pedagogy Edition</span>
       </div>
-      <h1 class="hero__title">Find a game for your <em class="hero__accent">mood</em></h1>
-      <p class="hero__subtitle">Filter by players, time, subjects, and soft skills — then pick something that fits the table tonight.</p>
+      <h1 class="hero__title">Find a game for your <em class="hero__accent">classroom</em></h1>
+      <p class="hero__subtitle">Filter by players, time, min age, subjects, and soft skills — then pick something that fits your learning goals.</p>
     </header>
 
     <section class="toolbar" aria-label="Search and filters">
@@ -54,14 +102,20 @@
         <p class="empty-state__text">Try loosening a filter or clearing your search — there's always another mood.</p>
       </div>
     </section>
-
-    <footer class="footer">
-      <p>Board Game Filter — sample data for demo purposes</p>
-    </footer>
   </div>
+
+  <div id="view-inspiration" class="hidden relative z-[1]" role="main" aria-label="Inspiration research"></div>
+
+  <footer id="global-footer" class="relative z-[1] mt-16" aria-label="Site footer"></footer>
 
   <!-- Optional: set your BGG API token (register at https://boardgamegeek.com/applications) -->
   <!-- <script>window.BGG_API_TOKEN = "your-token-here";</script> -->
-  <script type="module" src="index.js"></script>
+  <script src="gamesData.js"></script>
+  <script src="bggApi.js"></script>
+  <script src="router.js"></script>
+  <script src="inspiration.js"></script>
+  <script src="gameSelector.js"></script>
+  <script src="footer.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
