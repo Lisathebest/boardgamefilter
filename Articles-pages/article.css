@@ -90,6 +90,17 @@
       center / cover no-repeat;
 }
 
+.article-hero__image--warm {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.15) 0%,
+      rgba(0, 0, 0, 0.35) 100%
+    ),
+    url("https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1400&q=80")
+      center / cover no-repeat;
+}
+
 .article-hero__title {
   position: relative;
   z-index: 1;

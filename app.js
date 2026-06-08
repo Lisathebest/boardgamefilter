@@ -29,9 +29,9 @@ function showView(route, section = null) {
   }
 
   const titles = {
-    [ROUTES.selector]: "Game Selector — EduPlay Selector",
-    [ROUTES.inspiration]: "Inspiration — EduPlay Selector",
-    [ROUTES.resources]: "Resources — EduPlay Selector",
+    [ROUTES.selector]: "Game Selector — LudoMind",
+    [ROUTES.inspiration]: "Inspiration — LudoMind",
+    [ROUTES.resources]: "Resources — LudoMind",
   };
   document.title = titles[route] || titles[ROUTES.selector];
 
@@ -48,4 +48,5 @@ initNav({
   onNavigate: (route, section = null) => navigateTo(route, section),
 });
 initGameSelector();
+initNewsletter();
 initFooter();

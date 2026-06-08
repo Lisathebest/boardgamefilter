@@ -4,7 +4,7 @@
  * Add href values as pages become available. Leave href as "" until ready.
  *
  * About column:
- *   - "What is EduPlay Selector?" → about/landing page URL
+ *   - "What is LudoMind?" → about/landing page URL
  *   - "F.A.Q. for Educators"       → FAQ page URL
  *   - "Contact Us"                 → contact URL or mailto: lisa.feng_28@tsinglan.org 
  *                                        Our Wechat Channel QR code: 
@@ -19,9 +19,9 @@ const FOOTER_COLUMNS = [
   {
     title: "About",
     links: [
-      { label: "What is EduPlay Selector?", href: "" },
+      { label: "What is LudoMind?", href: "" },
       { label: "The Pedagogy of Play", href: "#/inspiration" },
-      { label: "F.A.Q. for Educators", href: "" },
+      { label: "F.A.Q.", href: "" },
       { label: "Contact Us", href: "" },
     ],
   },
@@ -83,7 +83,7 @@ function renderFooter() {
         </button>
       </div>
       <p class="mx-auto mt-10 max-w-5xl text-center text-xs text-slate-400">
-        EduPlay Selector — evidence-based board game curation for K–12 educators
+        LudoMind
       </p>
     </div>
   `;

@@ -6,6 +6,12 @@ const WEBSITE_FILTER_TAGS = [
   { id: "game-based-learning", label: "Game Based Learning" },
 ];
 
+const ONLINE_GAMES_FILTER_TAGS = [
+  { id: "game-collection", label: "Game Collection" },
+  { id: "classroom-sized-games", label: "Classroom-sized Games" },
+  { id: "solo-board-game", label: "Solo Board Game" },
+];
+
 const RESOURCE_CONTENT = {
   websites: {
     id: "websites",
@@ -50,21 +56,25 @@ const RESOURCE_CONTENT = {
     id: "youtubers",
     title: "YouTubers",
     subtitle: "Channels that explain rules clearly and model positive table culture.",
+    layout: "youtube-channels",
     items: [
       {
         name: "Watch It Played",
         url: "https://www.youtube.com/@WatchItPlayed",
         description: "Step-by-step teach-and-play videos — ideal for learning a game before leading it with students.",
+        avatar: "",
       },
       {
         name: "Actualol",
         url: "https://www.youtube.com/@Actualol",
         description: "Light, classroom-friendly rundowns of family-weight games and party titles.",
+        avatar: "",
       },
       {
         name: "Board Game Teacher",
         url: "https://www.youtube.com/results?search_query=board+game+classroom+teacher",
         description: "Search curated classroom-play playlists and educator walkthroughs on YouTube.",
+        avatar: "",
       },
     ],
   },
@@ -72,22 +82,20 @@ const RESOURCE_CONTENT = {
     id: "online-games",
     title: "Online Board Games",
     subtitle: "Browser-based platforms for remote clubs, hybrid classes, or demo sessions.",
-    layout: "links",
+    layout: "filtered-cards",
+    filters: ONLINE_GAMES_FILTER_TAGS,
     items: [
       {
         name: "Board Game Arena",
         url: "https://boardgamearena.com/",
         description: "Large catalog of officially licensed titles with turn enforcement — strong for structured remote play.",
+        tags: ["game-collection"],
       },
       {
         name: "Tabletopia",
         url: "https://tabletopia.com/",
         description: "Sandbox 3D tables; useful when you need free movement and house rules for a lesson prototype.",
-      },
-      {
-        name: "Boiteajeux",
-        url: "https://www.boiteajeux.net/",
-        description: "Lightweight classics (e.g. Colt Express, Hanabi) with low setup — good for quick digital warm-ups.",
+        tags: ["game-collection"],
       },
     ],
   },
@@ -106,6 +114,16 @@ const RESOURCE_CONTENT = {
         imageAlt: "Children engaged in playful learning",
         lang: "English",
         accent: "sky",
+      },
+      {
+        title: "Process Your Own Emotions First, Before You Can Help Your Child Navigate Failure",
+        excerpt:
+          "When a child loses, your body speaks louder than your words. Johnny C. reflects on learning to manage his own emotions before comforting young players.",
+        url: "Articles-pages/process-emotions-before-failure.html",
+        image: "",
+        imageAlt: "Adult and child sharing a quiet moment together",
+        lang: "English",
+        accent: "emerald",
       },
       {
         title: "Exploring Play Sufficiency webinar series report",
@@ -148,11 +166,11 @@ const RESOURCE_NAV_ITEMS = [
   { section: "articles", label: "Articles" },
 ];
 
-function getTagLabel(tagId, filters = WEBSITE_FILTER_TAGS) {
+function getTagLabel(tagId, filters) {
   return filters.find((tag) => tag.id === tagId)?.label || tagId;
 }
 
-function renderResourceTagPills(tags, filters = WEBSITE_FILTER_TAGS) {
+function renderResourceTagPills(tags, filters) {
   if (!tags?.length) return "";
 
   return `
@@ -168,7 +186,71 @@ function renderResourceTagPills(tags, filters = WEBSITE_FILTER_TAGS) {
   `;
 }
 
-function renderResourceCard(item, filters = WEBSITE_FILTER_TAGS) {
+function renderResourceCardImage(item, accent = "emerald") {
+  if (item.image) {
+    return `<img src="${item.image}" alt="" class="resource-card__image" loading="lazy">`;
+  }
+
+  const tone = accent === "sky" ? "article-card__placeholder--sky" : "article-card__placeholder--emerald";
+  return `<div class="article-card__placeholder ${tone}" role="img" aria-hidden="true"></div>`;
+}
+
+function renderFilteredResourceCard(item, _filters, index = 0) {
+  const tagAttr = (item.tags || []).join(" ");
+  const accent = index % 2 === 0 ? "emerald" : "sky";
+  const ctaClass = accent === "sky" ? "resource-card__cta--sky" : "resource-card__cta--emerald";
+
+  return `
+    <li class="resource-card" data-resource-tags="${tagAttr}">
+      <div class="resource-card__media">
+        ${renderResourceCardImage(item, accent)}
+      </div>
+      <div class="resource-card__body">
+        <h3 class="resource-card__title">${item.name}</h3>
+        <p class="resource-card__excerpt">${item.description}</p>
+        <a href="${item.url}" class="resource-card__cta ${ctaClass}" target="_blank" rel="noopener noreferrer">
+          Visit<span class="sr-only"> ${item.name} (opens in new tab)</span>
+        </a>
+      </div>
+    </li>
+  `;
+}
+
+function renderYoutubeChannel(item, index = 0) {
+  const tones = ["rose", "sky", "amber"];
+  const tone = tones[index % tones.length];
+  const initials = item.name
+    .split(/\s+/)
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  const avatar = item.avatar
+    ? `<img src="${item.avatar}" alt="" class="yt-channel__avatar" loading="lazy">`
+    : `<div class="yt-channel__avatar yt-channel__avatar--placeholder yt-channel__avatar--${tone}" aria-hidden="true">${initials}</div>`;
+
+  return `
+    <li class="yt-channel">
+      <a href="${item.url}" class="yt-channel__link" target="_blank" rel="noopener noreferrer">
+        <div class="yt-channel__icon-wrap">
+          ${avatar}
+          <span class="yt-channel__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="yt-channel__badge-icon">
+              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .6 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z"/>
+              <path fill="#fff" d="M9.75 15.02l6.5-3.52-6.5-3.52v7.04z"/>
+            </svg>
+          </span>
+        </div>
+        <span class="yt-channel__name">${item.name}</span>
+        <p class="yt-channel__desc">${item.description}</p>
+        <span class="sr-only"> (opens in new tab)</span>
+      </a>
+    </li>
+  `;
+}
+
+function renderResourceCard(item, filters) {
   const tagAttr = (item.tags || []).join(" ");
 
   return `
@@ -185,33 +267,33 @@ function renderResourceCard(item, filters = WEBSITE_FILTER_TAGS) {
   `;
 }
 
-function renderWebsiteFilters(section) {
-  const filters = section.filters || WEBSITE_FILTER_TAGS;
+function renderResourceFilters(section) {
+  const filters = section.filters || [];
 
   return `
-    <div class="resource-filters" role="group" aria-label="Filter websites by topic">
+    <div class="resource-filters" role="group" aria-label="Filter ${section.title} by topic">
       ${filters
         .map(
           (tag) => `
         <button
           type="button"
           class="resource-filter-pill"
-          data-website-filter="${tag.id}"
+          data-resource-filter="${tag.id}"
           aria-pressed="false"
         >${tag.label}</button>
       `
         )
         .join("")}
-      <button type="button" class="resource-filter-pill resource-filter-pill--clear hidden" data-website-filter-clear aria-label="Clear website filters">
+      <button type="button" class="resource-filter-pill resource-filter-pill--clear hidden" data-resource-filter-clear aria-label="Clear ${section.title} filters">
         Clear
       </button>
     </div>
   `;
 }
 
-function applyWebsiteFilters(sectionRoot, activeTags) {
+function applyResourceFilters(sectionRoot, activeTags) {
   const cards = sectionRoot.querySelectorAll("[data-resource-tags]");
-  const clearBtn = sectionRoot.querySelector("[data-website-filter-clear]");
+  const clearBtn = sectionRoot.querySelector("[data-resource-filter-clear]");
   const hasActive = activeTags.size > 0;
 
   clearBtn?.classList.toggle("hidden", !hasActive);
@@ -222,23 +304,23 @@ function applyWebsiteFilters(sectionRoot, activeTags) {
     card.classList.toggle("hidden", !visible);
   });
 
-  const emptyState = sectionRoot.querySelector("[data-website-empty]");
+  const emptyState = sectionRoot.querySelector("[data-resource-empty]");
   if (emptyState) {
     const anyVisible = [...cards].some((card) => !card.classList.contains("hidden"));
     emptyState.classList.toggle("hidden", anyVisible);
   }
 }
 
-function initWebsiteFilters(section) {
+function initResourceFilters(section) {
   const sectionRoot = document.getElementById(section.id);
   if (!sectionRoot || sectionRoot.dataset.filtersInit) return;
 
   const activeTags = new Set();
-  const pills = sectionRoot.querySelectorAll("[data-website-filter]");
+  const pills = sectionRoot.querySelectorAll("[data-resource-filter]");
 
   pills.forEach((pill) => {
     pill.addEventListener("click", () => {
-      const tagId = pill.dataset.websiteFilter;
+      const tagId = pill.dataset.resourceFilter;
       if (activeTags.has(tagId)) {
         activeTags.delete(tagId);
         pill.setAttribute("aria-pressed", "false");
@@ -248,30 +330,21 @@ function initWebsiteFilters(section) {
         pill.setAttribute("aria-pressed", "true");
         pill.classList.add("resource-filter-pill--active");
       }
-      applyWebsiteFilters(sectionRoot, activeTags);
+      applyResourceFilters(sectionRoot, activeTags);
     });
   });
 
-  sectionRoot.querySelector("[data-website-filter-clear]")?.addEventListener("click", () => {
+  sectionRoot.querySelector("[data-resource-filter-clear]")?.addEventListener("click", () => {
     activeTags.clear();
     pills.forEach((pill) => {
       pill.setAttribute("aria-pressed", "false");
       pill.classList.remove("resource-filter-pill--active");
     });
-    applyWebsiteFilters(sectionRoot, activeTags);
+    applyResourceFilters(sectionRoot, activeTags);
   });
 
   sectionRoot.dataset.filtersInit = "true";
 }
-
-const ARTICLE_DOC_ICON = `
-  <svg class="article-card__doc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-    <polyline points="14 2 14 8 20 8"/>
-    <line x1="16" y1="13" x2="8" y2="13"/>
-    <line x1="16" y1="17" x2="8" y2="17"/>
-  </svg>
-`;
 
 function renderArticleCardImage(item) {
   if (item.image) {
@@ -286,13 +359,12 @@ function renderArticleCard(item) {
   const accent = item.accent === "sky" ? "article-card__cta--sky" : "article-card__cta--emerald";
   const cta = item.url
     ? `<a href="${item.url}" class="article-card__cta ${accent}" target="_blank" rel="noopener noreferrer">Read More<span class="sr-only">: ${item.title} (opens in new tab)</span></a>`
-    : `<span class="article-card__cta ${accent} article-card__cta--soon" aria-disabled="true">Coming Soon</span>`;
+    : `<span class="article-card__cta article-card__cta--soon" aria-disabled="true">Coming Soon</span>`;
 
   return `
     <li class="article-card">
       <div class="article-card__media">
         ${renderArticleCardImage(item)}
-        <span class="article-card__doc-badge" aria-hidden="true">${ARTICLE_DOC_ICON}</span>
         ${item.lang ? `<span class="article-card__lang">${item.lang}</span>` : ""}
       </div>
       <div class="article-card__body">
@@ -310,9 +382,15 @@ function renderResourceSection(key) {
 
   const isArticleGrid = section.layout === "article-cards";
   const isFilteredLinks = section.layout === "filtered-links";
-  const filters = section.filters || WEBSITE_FILTER_TAGS;
+  const isFilteredCards = section.layout === "filtered-cards";
+  const isYoutubeChannels = section.layout === "youtube-channels";
+  const filters = section.filters || [];
 
   let body = `<ul class="space-y-4">${section.items.map((item) => renderResourceCard(item, filters)).join("")}</ul>`;
+
+  if (isYoutubeChannels) {
+    body = `<ul class="yt-channel-grid">${section.items.map(renderYoutubeChannel).join("")}</ul>`;
+  }
 
   if (isArticleGrid) {
     body = `<ul class="article-card-grid">${section.items.map(renderArticleCard).join("")}</ul>`;
@@ -320,9 +398,17 @@ function renderResourceSection(key) {
 
   if (isFilteredLinks) {
     body = `
-      ${renderWebsiteFilters(section)}
+      ${renderResourceFilters(section)}
       <ul class="resource-link-list space-y-4">${section.items.map((item) => renderResourceCard(item, filters)).join("")}</ul>
-      <p class="resource-empty hidden text-center text-sm text-slate-500" data-website-empty>No websites match these filters — try clearing a tag.</p>
+      <p class="resource-empty hidden text-center text-sm text-slate-500" data-resource-empty>No items match these filters — try clearing a tag.</p>
+    `;
+  }
+
+  if (isFilteredCards) {
+    body = `
+      ${renderResourceFilters(section)}
+      <ul class="resource-card-grid">${section.items.map((item, index) => renderFilteredResourceCard(item, filters, index)).join("")}</ul>
+      <p class="resource-empty hidden text-center text-sm text-slate-500" data-resource-empty>No items match these filters — try clearing a tag.</p>
     `;
   }
 
@@ -365,7 +451,9 @@ function renderResources(container) {
     </div>
   `;
 
-  initWebsiteFilters(RESOURCE_CONTENT.websites);
+  Object.values(RESOURCE_CONTENT)
+    .filter((section) => section.layout === "filtered-links" || section.layout === "filtered-cards")
+    .forEach(initResourceFilters);
 }
 
 function scrollToResourceSection(sectionId) {

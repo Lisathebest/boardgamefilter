@@ -1,14 +1,14 @@
 ---
-description: Non-negotiable EduPlay Selector product and data requirements
+description: Non-negotiable LudoMind product and data requirements
 alwaysApply: true
 ---
 
-# EduPlay Selector — Strict Requirements
+# LudoMind — Strict Requirements
 
 Read `REQUIREMENTS.md` for full detail. These rules are mandatory on every change.
 
 ## Product
-- K–12 educator tool (**EduPlay Selector**), not a hobbyist BGG catalog
+- K–12 educator tool (**LudoMind**), not a hobbyist BGG catalog
 - Global sticky navbar always visible: **Game Selector**, **Inspiration**, **Resources** (+ future pages)
 
 ## Data (`gamesData.js`)
