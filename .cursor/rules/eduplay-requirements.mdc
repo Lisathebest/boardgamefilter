@@ -9,7 +9,7 @@ Read `REQUIREMENTS.md` for full detail. These rules are mandatory on every chang
 
 ## Product
 - K–12 educator tool (**EduPlay Selector**), not a hobbyist BGG catalog
-- Two views only: **Game Selector** + **Inspiration** (global sticky navbar always visible)
+- Global sticky navbar always visible: **Game Selector**, **Inspiration**, **Resources** (+ future pages)
 
 ## Data (`gamesData.js`)
 Required fields: `id`, `name`, `subjects[]`, `softSkills[]`, `pedagogicalTrait`, `researchNote`, `players`, `duration`, `bggId`
@@ -36,5 +36,12 @@ Required fields: `id`, `name`, `subjects[]`, `softSkills[]`, `pedagogicalTrait`,
 - Pill-shaped controls, rounded-3xl cards, warm OKLCH palette, ambient blur background
 
 ## Technical
-- Hash router: `#/` and `#/inspiration`
+- Hash router: `#/`, `#/inspiration`, `#/resources` (+ optional section paths)
 - Never commit `BGG_API_TOKEN`
+
+## Global nav (`nav.js`)
+- **Direct links** (`type: "link"`) — single-page tabs (Game Selector, Inspiration)
+- **Page dropdowns** (`type: "page-dropdown"`) — full pages with section anchors; default `openOn: "hover"`
+- **Filter multiselects** (`gameSelector.js`, `filter__*`) — click-only; never reuse nav dropdown pattern
+- New page dropdown: add to `NAV_ITEMS` in `nav.js`, register route in `router.js`, add view + renderer
+- Use `openOn: "click"` only when hover is unsuitable; do not change filter dropdowns to hover

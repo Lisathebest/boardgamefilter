@@ -6,11 +6,12 @@
  * About column:
  *   - "What is EduPlay Selector?" → about/landing page URL
  *   - "F.A.Q. for Educators"       → FAQ page URL
- *   - "Contact Us"                 → contact URL or mailto:
+ *   - "Contact Us"                 → contact URL or mailto: lisa.feng_28@tsinglan.org 
+ *                                        Our Wechat Channel QR code: 
  *
  * Contribute column:
- *   - "Suggest a Game"             → game suggestion form URL
- *   - "Submit a Lesson Plan"       → lesson plan submission URL
+ *   - "Suggest a Game"             → add note:"Feel free to suggest any game to add to the library and we will share it on here" game suggestion form URL:
+ *   - "Submit a Lesson Plan"       → as hovered extend display:"Submit a Lesson Plan you wanna share with others" lesson plan submission URL
  *   - "Report a Bug"               → issue tracker or bug report URL
  *   - "Support Our Research"       → donation or support page URL
  */
