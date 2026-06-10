@@ -272,14 +272,24 @@ function buildGameCardView(game) {
 function buildGameCardLink(game) {
   if (
     typeof GAME_DETAIL_PDF !== "undefined" &&
-    typeof GAME_PDF_ANCHOR_IDS !== "undefined" &&
+    typeof GAME_PDF_ANCHORS !== "undefined" &&
     GAME_DETAIL_PDF &&
-    GAME_PDF_ANCHOR_IDS.has(game.id)
+    Object.prototype.hasOwnProperty.call(GAME_PDF_ANCHORS, game.id)
   ) {
-    const anchor = game.detailAnchor ?? game.id;
+    const { search, page } = GAME_PDF_ANCHORS[game.id];
+    const query = new URLSearchParams({ search });
+    if (page) query.set("page", String(page));
     return {
-      url: `${GAME_DETAIL_PDF}#nameddest=${encodeURIComponent(anchor)}`,
+      url: `./pdf viewer/pdf-viewer.html?${query.toString()}`,
       label: `Open full guide for ${game.name} in a new tab`,
+    };
+  }
+
+  const customLink = String(game.linkTag ?? game.link ?? "").trim();
+  if (customLink) {
+    return {
+      url: customLink,
+      label: `Open more about ${game.name} in a new tab`,
     };
   }
 

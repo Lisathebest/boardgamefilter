@@ -27,10 +27,11 @@ index.html
 └── #global-footer       (filled by footer.js)
 
 Articles-pages/          (standalone article HTML — links back via query params)
+pdf viewer/              (PDF text-search viewer + auto-generated gamePdfAnchors.js)
 
 Script load order (classic scripts, NOT ES modules — must work via file://):
-  gamesData.js → bggApi.js → router.js → inspiration.js → resources.js
-  → nav.js → gameSelector.js → footer.js → app.js
+  gamesData.js → pdf viewer/gamePdfAnchors.js → bggApi.js → router.js
+  → inspiration.js → resources.js → nav.js → gameSelector.js → footer.js → app.js
 ```
 
 `app.js` bootstraps: `initRouter(showView)` → `initNav()` → `initGameSelector()` → `initFooter()`.
@@ -55,6 +56,7 @@ No React, no Vite.
 | Game Selector, cards, filters, Resources | `index.css` (OKLCH CSS variables) |
 | Navbar, Inspiration, Footer | Tailwind CDN (see `index.html` `<script>tailwind.config`) |
 | Standalone articles | `Articles-pages/article.css` |
+| PDF viewer | `pdf viewer/pdf-viewer.css` (+ shared tokens from `index.css`) |
 
 **Fonts:** DM Sans (display), Plus Jakarta Sans (body).
 
@@ -66,7 +68,11 @@ No React, no Vite.
 | File | Role |
 | ---- | ---- |
 | `gamesData.js` | **Single source of truth** — `const GAMES = [...]` |
-| `gameSelector.js` | Filters, search, `filterGames()`, card HTML (`renderGameCard`), tag summarization, BGG image preload |
+| `gameSelector.js` | Filters, search, `filterGames()`, card HTML (`renderGameCard`), card detail links, tag summarization, BGG image preload |
+| `pdf viewer/gamePdfAnchors.js` | Auto-generated PDF title search map (`GAME_PDF_ANCHORS`) — run `scripts/add-pdf-anchors.py` after PDF or `gamesData.js` changes |
+| `pdf viewer/pdf-viewer.html` | Standalone page — opens the board game report PDF and scrolls to a title (Cmd+F-style text search via PDF.js) |
+| `pdf viewer/pdf-viewer.js` / `pdf-viewer.css` | Viewer logic + layout (loads `../assets/Final_Board_Game_Report_V3.pdf`) |
+| `scripts/add-pdf-anchors.py` | Matches `gamesData.js` titles to PDF section headings; writes `pdf viewer/gamePdfAnchors.js` |
 | `inspiration.js` | `renderInspiration(container)` — research page HTML + citation formatting |
 | `resources.js` | `RESOURCE_CONTENT` config, Resources page renderers, section filters |
 | `nav.js` | `NAV_ITEMS` config, global navbar render, hover page-dropdowns |
@@ -99,16 +105,71 @@ Each game object:
   duration: "15-20 min",             // human-readable string
   minAge: 8,                       // number → shown as "8+" pill; min-age filter
   targetStages: ["Preschool", …],  // summarized in card footer "Targets:" line only
-  bggId: "83195",                  // cover image lookup ONLY — not shown in UI
+  bggId: "83195",                  // cover image + card link fallback (see below)
+  link: "https://…",               // optional — custom detail URL (alias: linkTag)
 }
 ```
 
 **`targetStages` allowed values:**  
 `Preschool` | `Lower Elementary` | `Upper Elementary` | `Secondary & Adult`
 
+**Optional fields for card links:**
+
+| Field | Purpose |
+| ----- | ------- |
+| `bggId` | BGG cover via API; card click fallback → `boardgamegeek.com/boardgame/{bggId}` |
+| `link` or `linkTag` | Full URL — card opens in a new tab when no PDF section exists (use for articles, Baidu pages, niche games not on BGG) |
+| `detailPdfTitle` | Rare override — PDF heading to match when `name` differs from the report (consumed by `scripts/add-pdf-anchors.py`) |
+
 **Do not add:** `bggScore`, BGG weight, rank, mechanism, theme fields (unless user explicitly approves).
 
 After editing `GAMES`, filter dropdown options for `subjects` and `softSkills` auto-rebuild from data at load time.
+
+### Adding a new game — card link checklist
+
+When you add a row to `gamesData.js`, decide how the card should open on click (`buildGameCardLink` in `gameSelector.js`):
+
+1. **PDF guide (preferred)** — title appears in `assets/Final_Board_Game_Report_V3.pdf`  
+   - Run `python3 scripts/add-pdf-anchors.py` to refresh `pdf viewer/gamePdfAnchors.js`  
+   - Card links to `pdf viewer/pdf-viewer.html?search=…&page=…` (text search, like Cmd+F)  
+   - If the PDF heading differs from `name`, add `"detailPdfTitle": "Exact PDF Heading"`
+
+2. **`link` or `linkTag`** — any other URL (article, Baidu page, publisher site, etc.)  
+   - Add `"link": "https://example.com/…"`  
+   - Used when there is **no** PDF match and you do not want BGG (or BGG has no entry)
+
+3. **`bggId` only** — commercial game on BoardGameGeek  
+   - Set `"bggId": "123456"` (non-empty string)  
+   - Cover loads from BGG API; card falls back to the BGG game page when not in the PDF
+
+4. **No link** — card is not clickable (plain `<article>`)  
+   - Missing PDF match, empty `bggId`, and no `link` / `linkTag`
+
+**Priority (first match wins):** PDF guide → `link` / `linkTag` → `bggId` → none.
+
+**After PDF or library changes:**
+
+```bash
+python3 scripts/add-pdf-anchors.py
+```
+
+Serve over `localhost` when testing PDF navigation (`python3 -m http.server 8000`).
+
+### Link coverage (current library)
+
+All games in `gamesData.js` currently have at least one card link (PDF, `link`, or `bggId`).
+
+**Custom `link` examples (no PDF section):**
+
+| `id` | Destination |
+| ---- | ----------- |
+| `sense-series` | Gcores article |
+| `yin-shi-zuo-hua` | Baidu news page |
+| `24-hour-doctor` | Baidu baijiahao article |
+
+**No PDF, BGG fallback:** e.g. `heureka`, `clumsy-thief-jr`, `duplik`, `terraforming-mars` — swap to `"link": "…"` if BGG is not the right page.
+
+Re-run `scripts/add-pdf-anchors.py` after updating the PDF so new report sections pick up PDF links automatically.
 
 ---
 
@@ -136,9 +197,8 @@ After editing `GAMES`, filter dropdown options for `subjects` and `softSkills` a
 - **Meta row:** `players`, `duration`
 - **Tag pills:** `minAge+` (`.tag--age`), up to 2 `subjects`, up to 2 `softSkills`, `+N` overflow badges
 - **Footer line:** `Targets: {summary}` from `formatTargetStagesSummary(targetStages)` — keep this; do not remove when adding features
+- **Clickable cards:** `<a target="_blank">` when a detail link exists (PDF guide → `linkTag` → BGG); otherwise non-clickable `<article>`
 - **No** BGG score / weight badges
-
-Full tag lists are reserved for a future **game detail modal** (not built yet).
 
 ---
 
@@ -218,14 +278,13 @@ open index.html               # file:// also works for in-app hash routing
 - Navbar (`nav.js`) + hash routing (Game Selector, Inspiration, Resources)
 - Resources page: Websites (filtered list), YouTubers (circular channel icons), Online Board Games (filtered square tiles), Articles (card grid)
 - Standalone republished articles under `Articles-pages/` with editorial layout
-- Full filter/search/card pipeline for sample games
+- Full filter/search/card pipeline for game library
 - Smart tag truncation + Targets summary line
+- Card detail links: PDF text-search viewer, `linkTag`, BGG fallback
 - Inspiration research page
 - Global footer + back to top
 
 ### Not implemented (safe to build if user asks)
-
-- Game detail modal/page (`data-game-id` on cards is ready)
 - Footer link URLs (FAQ, Contact, forms, bug report)
 - Contact / suggestion forms
 - `targetStages` multiselect filter (user chose `minAge` filter instead)
@@ -243,6 +302,7 @@ open index.html               # file:// also works for in-app hash routing
 - Navbar renders on load (`nav.js` → `#global-nav-tabs`)
 - No BGG scores in UI
 - New game fields wired to filters/cards if user-facing
+- New games: PDF match or `link` / `bggId` for card links; run `add-pdf-anchors.py` if PDF changed
 - `targetStages` bottom line still present on cards
 - Inspiration citations untouched
 - `gamesData.js` content not deleted without user request
