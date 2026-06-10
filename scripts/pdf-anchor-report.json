@@ -1,5 +1,6 @@
 {
-  "pdf": "assets/Final_Board_Game_Report_V3.pdf",
+  "guide": "assets/Final_Board_Game_Report_V3.docx",
+  "sections_found": 61,
   "matched": 34,
   "unmatched": [
     {
@@ -32,7 +33,7 @@
     },
     {
       "id": "lift-it",
-      "name": "Lift It! (\u4e24\u4eba\u4e09\u7b51)"
+      "name": "Lift It!"
     },
     {
       "id": "knockout",
@@ -76,7 +77,7 @@
     },
     {
       "id": "24-hour-doctor",
-      "name": "24 \u5c0f\u65f6\u533b\u751f (24-Hour Doctor) / \u706b\u7ebf\u6025\u6551\u5ba4"
+      "name": "24 \u5c0f\u65f6\u533b\u751f (24-Hour Doctor)"
     },
     {
       "id": "robot-turtles",
@@ -120,7 +121,7 @@
     },
     {
       "id": "ecosystem",
-      "name": "Ecosystem"
+      "name": "Ecosystem(2019)"
     },
     {
       "id": "keep-cool",
@@ -143,274 +144,240 @@
     {
       "id": "men-at-work",
       "name": "Men at Work",
-      "pdf_title": "Men at Work",
-      "page": 0,
-      "page_display": 1,
-      "pdf_y": 624.8736724853516
+      "guide_title": "Men at Work",
+      "section": 1,
+      "paragraph_index": 2
     },
     {
       "id": "junk-art",
       "name": "Junk Art",
-      "pdf_title": "Junk Art",
-      "page": 1,
-      "page_display": 2,
-      "pdf_y": 673.6225433349609
+      "guide_title": "Junk Art",
+      "section": 2,
+      "paragraph_index": 8
     },
     {
       "id": "cake-stack",
-      "name": "Cake Stack",
-      "pdf_title": "Cake Stack",
-      "page": 2,
-      "page_display": 3,
-      "pdf_y": 709.6216888427734
+      "name": "Cakes",
+      "guide_title": "Cakes",
+      "section": 3,
+      "paragraph_index": 14
     },
     {
       "id": "stick-stack",
       "name": "Stick Stack",
-      "pdf_title": "Stick Stack",
-      "page": 2,
-      "page_display": 3,
-      "pdf_y": 223.6328125
+      "guide_title": "Stick Stack",
+      "section": 4,
+      "paragraph_index": 20
     },
     {
       "id": "katamino",
       "name": "Katamino",
-      "pdf_title": "Katamino",
-      "page": 4,
-      "page_display": 5,
-      "pdf_y": 678.1225433349609
+      "guide_title": "Katamino",
+      "section": 5,
+      "paragraph_index": 26
     },
     {
       "id": "rhino-hero",
       "name": "Rhino Hero",
-      "pdf_title": "Rhino Hero",
-      "page": 5,
-      "page_display": 6,
-      "pdf_y": 782.3701019287109
+      "guide_title": "Rhino Hero",
+      "section": 6,
+      "paragraph_index": 32
     },
     {
       "id": "yubibo",
       "name": "Yubibo (Finger Balance)",
-      "pdf_title": "Yubibo (Finger Balance)",
-      "page": 5,
-      "page_display": 6,
-      "pdf_y": 312.130859375
+      "guide_title": "Yubibo (Finger Balance)",
+      "section": 7,
+      "paragraph_index": 38
     },
     {
       "id": "things-in-rings",
       "name": "Things in Rings",
-      "pdf_title": "Things in Rings",
-      "page": 6,
-      "page_display": 7,
-      "pdf_y": 276.88134765625
+      "guide_title": "Things in Rings",
+      "section": 8,
+      "paragraph_index": 44
     },
     {
       "id": "dixit",
       "name": "Dixit",
-      "pdf_title": "Dixit",
-      "page": 32,
-      "page_display": 33,
-      "pdf_y": 306.88134765625
+      "guide_title": "Dixit",
+      "section": 39,
+      "paragraph_index": 230
     },
     {
       "id": "zingo",
       "name": "Zingo!",
-      "pdf_title": "Zingo!",
-      "page": 7,
-      "page_display": 8,
-      "pdf_y": 348.1298522949219
+      "guide_title": "Zingo!",
+      "section": 9,
+      "paragraph_index": 50
     },
     {
       "id": "sleeping-queens",
       "name": "Sleeping Queens",
-      "pdf_title": "Sleeping Queens",
-      "page": 8,
-      "page_display": 9,
-      "pdf_y": 475.6269226074219
+      "guide_title": "Sleeping Queens",
+      "section": 10,
+      "paragraph_index": 56
     },
     {
       "id": "left-center-right",
       "name": "LCR (Left Center Right)",
-      "pdf_title": "LCR (Left Center Right)",
-      "page": 9,
-      "page_display": 10,
-      "pdf_y": 615.8744964599609
+      "guide_title": "LCR (Left Center Right)",
+      "section": 11,
+      "paragraph_index": 62
     },
     {
       "id": "clumsy-thief",
       "name": "Clumsy Thief",
-      "pdf_title": "Clumsy Thief",
-      "page": 9,
-      "page_display": 10,
-      "pdf_y": 192.13427734375
+      "guide_title": "Clumsy Thief",
+      "section": 12,
+      "paragraph_index": 68
     },
     {
       "id": "rummikub",
       "name": "Rummikub",
-      "pdf_title": "Rummikub",
-      "page": 10,
-      "page_display": 11,
-      "pdf_y": 334.6303405761719
+      "guide_title": "Rummikub",
+      "section": 13,
+      "paragraph_index": 74
     },
     {
       "id": "even-stevens-odd",
       "name": "Even Steven's Odd",
-      "pdf_title": "Even Steven\u2019s Odd",
-      "page": 11,
-      "page_display": 12,
-      "pdf_y": 427.6278991699219
+      "guide_title": "Even Steven\u2019s Odd",
+      "section": 14,
+      "paragraph_index": 80
     },
     {
       "id": "froggy-fractions",
       "name": "Froggy Fractions",
-      "pdf_title": "Froggy Fractions",
-      "page": 12,
-      "page_display": 13,
-      "pdf_y": 687.8715667724609
+      "guide_title": "Froggy Fractions",
+      "section": 15,
+      "paragraph_index": 86
     },
     {
       "id": "spinderella",
       "name": "Spinderella",
-      "pdf_title": "Spinderella",
-      "page": 13,
-      "page_display": 14,
-      "pdf_y": 734.3705902099609
+      "guide_title": "Spinderella",
+      "section": 16,
+      "paragraph_index": 92
     },
     {
       "id": "ubongo-3d",
       "name": "Ubongo 3D",
-      "pdf_title": "Ubongo 3D",
-      "page": 14,
-      "page_display": 15,
-      "pdf_y": 782.3696136474609
+      "guide_title": "Ubongo 3D",
+      "section": 17,
+      "paragraph_index": 98
     },
     {
       "id": "no-thanks",
       "name": "No Thanks!",
-      "pdf_title": "No Thanks!",
-      "page": 14,
-      "page_display": 15,
-      "pdf_y": 312.13037109375
+      "guide_title": "No Thanks!",
+      "section": 18,
+      "paragraph_index": 104
     },
     {
       "id": "planet",
       "name": "My First Planet (Planet)",
-      "pdf_title": "Planet",
-      "page": 15,
-      "page_display": 16,
-      "pdf_y": 451.6274108886719
+      "guide_title": "Planet",
+      "section": 19,
+      "paragraph_index": 110
     },
     {
       "id": "animals-of-the-world",
       "name": "Animals of the World",
-      "pdf_title": "Animals of the World",
-      "page": 16,
-      "page_display": 17,
-      "pdf_y": 497.3764343261719
+      "guide_title": "Animals of the World",
+      "section": 20,
+      "paragraph_index": 116
     },
     {
       "id": "timeline",
       "name": "Timeline",
-      "pdf_title": "Timeline",
-      "page": 17,
-      "page_display": 18,
-      "pdf_y": 710.3715667724609
+      "guide_title": "Timeline",
+      "section": 21,
+      "paragraph_index": 122
     },
     {
       "id": "very-silly-sentences",
       "name": "Very Silly Sentences",
-      "pdf_title": "Very Silly Sentences",
-      "page": 18,
-      "page_display": 19,
-      "pdf_y": 782.3715667724609
+      "guide_title": "Very Silly Sentences",
+      "section": 22,
+      "paragraph_index": 128
     },
     {
       "id": "happy-hats",
       "name": "Happy Hats",
-      "pdf_title": "Happy Hats",
-      "page": 18,
-      "page_display": 19,
-      "pdf_y": 180.88525390625
-    },
-    {
-      "id": "mice-and-cheese",
-      "name": "Mice and Cheese (Mucks M\u00e4uschen Still)",
-      "pdf_title": "Mice and Cheese",
-      "page": 19,
-      "page_display": 20,
-      "pdf_y": 435.1274108886719
+      "guide_title": "Happy Hats",
+      "section": 23,
+      "paragraph_index": 134
     },
     {
       "id": "tall-tale",
       "name": "Tall Tale",
-      "pdf_title": "Tall Tale",
-      "page": 20,
-      "page_display": 21,
-      "pdf_y": 394.6293640136719
+      "guide_title": "Tall Tale",
+      "section": 24,
+      "paragraph_index": 140
     },
     {
       "id": "cooking-up-sentences",
       "name": "Cooking up Sentences",
-      "pdf_title": "Cooking up Sentences",
-      "page": 21,
-      "page_display": 22,
-      "pdf_y": 486.1264343261719
+      "guide_title": "Cooking up Sentences",
+      "section": 25,
+      "paragraph_index": 146
     },
     {
       "id": "taco-cat-goat-cheese-pizza",
       "name": "Taco Cat Goat Cheese Pizza",
-      "pdf_title": "Taco Cat Goat Cheese Pizza",
-      "page": 22,
-      "page_display": 23,
-      "pdf_y": 782.3696136474609
+      "guide_title": "Taco Cat Goat Cheese Pizza",
+      "section": 26,
+      "paragraph_index": 152
     },
     {
       "id": "once-upon-a-time",
       "name": "Once Upon a Time",
-      "pdf_title": "Once Upon a Time",
-      "page": 23,
-      "page_display": 24,
-      "pdf_y": 719.3715667724609
+      "guide_title": "Once Upon a Time",
+      "section": 27,
+      "paragraph_index": 158
     },
     {
       "id": "set",
       "name": "Set",
-      "pdf_title": "Set",
-      "page": 24,
-      "page_display": 25,
-      "pdf_y": 782.3696136474609
+      "guide_title": "Set",
+      "section": 28,
+      "paragraph_index": 164
     },
     {
       "id": "dobble",
       "name": "Dobble (Spot It!)",
-      "pdf_title": "Dobble (Spot It!)",
-      "page": 24,
-      "page_display": 25,
-      "pdf_y": 234.88134765625
+      "guide_title": "Dobble (Spot It!)",
+      "section": 29,
+      "paragraph_index": 170
     },
     {
       "id": "ghost-blitz",
       "name": "Ghost Blitz",
-      "pdf_title": "Ghost Blitz",
-      "page": 25,
-      "page_display": 26,
-      "pdf_y": 275.38134765625
+      "guide_title": "Ghost Blitz",
+      "section": 30,
+      "paragraph_index": 176
     },
     {
       "id": "cabo",
       "name": "Cabo",
-      "pdf_title": "Cabo",
-      "page": 26,
-      "page_display": 27,
-      "pdf_y": 348.1293640136719
+      "guide_title": "Cabo",
+      "section": 31,
+      "paragraph_index": 182
     },
     {
       "id": "exploding-kittens",
       "name": "Exploding Kittens",
-      "pdf_title": "Exploding Kittens",
-      "page": 47,
-      "page_display": 48,
-      "pdf_y": 569.3774108886719
+      "guide_title": "Exploding Kittens",
+      "section": 57,
+      "paragraph_index": 338
+    },
+    {
+      "id": "daybreak",
+      "name": "Daybreak",
+      "guide_title": "Daybreak",
+      "section": 61,
+      "paragraph_index": 362
     }
   ]
 }

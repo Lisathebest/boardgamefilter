@@ -10,7 +10,7 @@ const GAMES = [
     "duration": "30-45 min",
     "minAge": 8,
     "targetStages": ["Upper Elementary", "Middle School"],
-    "bggId": "261189"
+    "bggId": "261114"
   },
   {
     "id": "junk-art",
@@ -27,10 +27,10 @@ const GAMES = [
   },
   {
     "id": "cake-stack",
-    "name": "Cake Stack",
+    "name": "Cakes",
     "subjects": ["Physics"],
     "softSkills": ["Spatial Perception", "Hand-eye Coordination", "Focus"],
-    "pedagogicalTrait": "Combination Stacking",
+    "pedagogicalTrait": "Paper-based Stacking",
     "researchNote": "A cake-themed stacking game that exercises players' spatial perception and balance through card combinations.",
     "players": "2-4",
     "duration": "15-20 min",
@@ -49,7 +49,7 @@ const GAMES = [
     "duration": "15-30 min",
     "minAge": 8,
     "targetStages": ["Lower Elementary", "Upper Elementary", "Middle School"],
-    "bggId": "136994"
+    "bggId": "204734"
   },
   {
     "id": "katamino",
@@ -62,7 +62,7 @@ const GAMES = [
     "duration": "10-20 min",
     "minAge": 8,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "6869"
+    "bggId": "6931"
   },
   {
     "id": "rhino-hero",
@@ -88,7 +88,7 @@ const GAMES = [
     "duration": "10 min",
     "minAge": 6,
     "targetStages": ["Lower Elementary", "Upper Elementary", "Middle School"],
-    "bggId": "347266"
+    "bggId": "425602"
   },
   {
     "id": "sense-series",
@@ -101,7 +101,8 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 6,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "link": "https://www.gcores.com/articles/189821"
+    "link": "https://www.gcores.com/articles/189821",
+    "bggId": "439332"
   },
   {
     "id": "things-in-rings",
@@ -114,7 +115,7 @@ const GAMES = [
     "duration": "15-20 min",
     "minAge": 8,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "284984"
+    "bggId": "408547"
   },
   {
     "id": "dixit",
@@ -140,7 +141,7 @@ const GAMES = [
     "duration": "5-10 min",
     "minAge": 4,
     "targetStages": ["Pre-K", "Lower Elementary"],
-    "bggId": "11382"
+    "bggId": "12616"
   },
   {
     "id": "sleeping-queens",
@@ -166,7 +167,7 @@ const GAMES = [
     "duration": "15-30 min",
     "minAge": 5,
     "targetStages": ["Lower Elementary", "Upper Elementary", "Middle School"],
-    "bggId": "3288"
+    "bggId": "3522"
   },
   {
     "id": "clumsy-thief-jr",
@@ -179,7 +180,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 5,
     "targetStages": ["Pre-K", "Lower Elementary"],
-    "bggId": "144588"
+    "bggId": "302676"
   },
   {
     "id": "clumsy-thief",
@@ -192,7 +193,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 8,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "131310"
+    "bggId": "148660"
   },
   {
     "id": "rummikub",
@@ -218,7 +219,7 @@ const GAMES = [
     "duration": "20 min",
     "minAge": 8,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "137021"
+    "bggId": "143070"
   },
   {
     "id": "froggy-fractions",
@@ -231,7 +232,7 @@ const GAMES = [
     "duration": "15-20 min",
     "minAge": 8,
     "targetStages": ["Upper Elementary", "Middle School"],
-    "bggId": "236402"
+    "bggId": "231650"
   },
   {
     "id": "spinderella",
@@ -244,7 +245,7 @@ const GAMES = [
     "duration": "15-20 min",
     "minAge": 6,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "171662"
+    "bggId": "171129"
   },
   {
     "id": "ubongo-3d",
@@ -257,7 +258,7 @@ const GAMES = [
     "duration": "25 min",
     "minAge": 8,
     "targetStages": ["Upper Elementary", "Middle School", "High School"],
-    "bggId": "50534"
+    "bggId": "46396"
   },
   {
     "id": "no-thanks",
@@ -335,7 +336,7 @@ const GAMES = [
     "duration": "30 min",
     "minAge": 8,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": ""
+    "bggId": "40993"
   },
   {
     "id": "timeline",
@@ -353,7 +354,7 @@ const GAMES = [
   {
     "id": "yin-shi-zuo-hua",
     "name": "吟诗作画 (Composing Poems and Painting)",
-    "subjects": ["Language Arts", "Literature"],
+    "subjects": ["Chinese", "Language Arts"],
     "softSkills": ["Imagination", "Creativity"],
     "pedagogicalTrait": "Poetic Imagery Association",
     "researchNote": "A creative game themed around ancient poetry, stimulating children's interest and imagination in classical literature.",
@@ -374,7 +375,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 5,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "25055"
+    "bggId": "37465"
   },
   {
     "id": "happy-hats",
@@ -387,20 +388,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 4,
     "targetStages": ["Pre-K", "Lower Elementary"],
-    "bggId": ""
-  },
-  {
-    "id": "mice-and-cheese",
-    "name": "Mice and Cheese (Mucks Mäuschen Still)",
-    "subjects": ["Logic"],
-    "softSkills": ["Memory", "Reaction Speed", "Dexterity"],
-    "pedagogicalTrait": "Suspenseful Fine Motor Action",
-    "researchNote": "A memory and dexterity game by HABA where players help mice find cheese without waking the cat. Praised for suspenseful mechanics.",
-    "players": "2-4",
-    "duration": "15 min",
-    "minAge": 5,
-    "targetStages": ["Pre-K", "Lower Elementary"],
-    "bggId": "32906"
+    "bggId": "354927"
   },
   {
     "id": "tall-tale",
@@ -413,7 +401,7 @@ const GAMES = [
     "duration": "30 min",
     "minAge": 8,
     "targetStages": ["Upper Elementary", "Middle School", "High School"],
-    "bggId": "206253"
+    "bggId": "223501"
   },
   {
     "id": "cooking-up-sentences",
@@ -426,7 +414,7 @@ const GAMES = [
     "duration": "20 min",
     "minAge": 7,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "162234"
+    "bggId": "35084"
   },
   {
     "id": "taco-cat-goat-cheese-pizza",
@@ -465,7 +453,7 @@ const GAMES = [
     "duration": "45 min",
     "minAge": 8,
     "targetStages": ["Upper Elementary", "Middle School", "High School"],
-    "bggId": "2453"
+    "bggId": "22348"
   },
   {
     "id": "set",
@@ -543,7 +531,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 5,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "2664"
+    "bggId": "7334"
   },
   {
     "id": "toddles-bobbles",
@@ -556,7 +544,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 5,
     "targetStages": ["Lower Elementary", "Upper Elementary", "Middle School"],
-    "bggId": "140417"
+    "bggId": "191895"
   },
   {
     "id": "foxy",
@@ -569,7 +557,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 8,
     "targetStages": ["Upper Elementary", "Middle School"],
-    "bggId": "362485"
+    "bggId": "359318"
   },
   {
     "id": "cheating-moth",
@@ -595,7 +583,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 6,
     "targetStages": ["Lower Elementary", "Upper Elementary", "Middle School"],
-    "bggId": "125301"
+    "bggId": "126771"
   },
   {
     "id": "chicken-cha-cha-cha",
@@ -621,7 +609,7 @@ const GAMES = [
     "duration": "20 min",
     "minAge": 7,
     "targetStages": ["Lower Elementary", "Upper Elementary"],
-    "bggId": "294320"
+    "bggId": "319980"
   },
   {
     "id": "break-the-cube",
@@ -634,7 +622,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 8,
     "targetStages": ["Upper Elementary", "Middle School", "High School"],
-    "bggId": "342263"
+    "bggId": "354669"
   },
   {
     "id": "cockroach-poker",
@@ -699,7 +687,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 4,
     "targetStages": ["Pre-K", "Lower Elementary"],
-    "bggId": "339"
+    "bggId": "4493"
   },
   {
     "id": "grab-your-breakfast",
@@ -725,7 +713,7 @@ const GAMES = [
     "duration": "60 min",
     "minAge": 10,
     "targetStages": ["Middle School", "High School"],
-    "bggId": "109317"
+    "bggId": "110794"
   },
   {
     "id": "forbidden-island",
@@ -751,7 +739,7 @@ const GAMES = [
     "duration": "15 min",
     "minAge": 7,
     "targetStages": ["Lower Elementary", "Upper Elementary", "Middle School"],
-    "bggId": "162286"
+    "bggId": "172225"
   },
   {
     "id": "jenga",
@@ -842,7 +830,7 @@ const GAMES = [
     "duration": "60-120 min",
     "minAge": 12,
     "targetStages": ["Middle School", "High School"],
-    "bggId": "11210"
+    "bggId": "14698"
   },
   {
     "id": "photosynthesis",
@@ -882,5 +870,18 @@ const GAMES = [
     "minAge": 12,
     "targetStages": ["Middle School", "High School"],
     "bggId": "167791"
+  },
+  {
+    "id": "daybreak",
+    "name": "Daybreak",
+    "subjects": ["Science", "Environmental Science", "Social Studies"],
+    "softSkills": ["Cooperation", "Systems Thinking", "Critical Thinking"],
+    "pedagogicalTrait": "Cooperative Climate Action Simulation",
+    "researchNote": "A co-operative game about climate action where each player controls a world power, deploying policies and technologies to dismantle global heating and build resilient societies. Challenge cards support differentiated difficulty for classroom play.",
+    "players": "1-4",
+    "duration": "60-90 min",
+    "minAge": 10,
+    "targetStages": ["Middle School", "High School"],
+    "bggId": "334986"
   }
 ];

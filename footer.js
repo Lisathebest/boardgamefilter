@@ -16,7 +16,7 @@
 const FOOTER_BRAND = {
   title: "What is LudoMind?",
   description:
-    "LudoMind bridges tabletop gaming and cognitive development. Board games are powerful microworlds for soft skills—yet many educators struggle with which games to use and how to integrate them. This selector offers research-backed matchmaking, turning classroom play into intentional learning.",
+    "LudoMind fuses Ludology (the study of games) and the Mind. We decode board game mechanics to train cognitive soft skills. Board games are powerful microworlds for soft skills—yet many educators struggle with which games to use and how to integrate them. This selector offers research-backed matchmaking, turning classroom play into intentional learning.",
 };
 
 const FOOTER_COLUMNS = [
@@ -40,12 +40,12 @@ const FOOTER_COLUMNS = [
 
 function renderFooterBrand() {
   return `
-    <div class="footer-brand md:max-w-xs lg:max-w-sm">
-      <div class="mb-3 flex items-center gap-2">
-        <span class="h-2 w-2 shrink-0 rounded-full bg-emerald-400" aria-hidden="true"></span>
-        <h2 class="font-display text-base font-bold text-white">${FOOTER_BRAND.title}</h2>
+    <div class="footer-brand">
+      <div class="footer-brand__heading">
+        <span class="footer-brand__dot" aria-hidden="true"></span>
+        <h2 class="footer-brand__title">${FOOTER_BRAND.title}</h2>
       </div>
-      <p class="text-sm leading-relaxed text-slate-400">${FOOTER_BRAND.description}</p>
+      <p class="footer-brand__description">${FOOTER_BRAND.description}</p>
     </div>
   `;
 }

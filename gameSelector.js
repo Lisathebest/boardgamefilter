@@ -4,6 +4,7 @@ const SUBJECT_EMOJI = {
   Math: "🔢",
   Logic: "🧩",
   "Language Arts": "📖",
+  Chinese: "📜",
   Vocabulary: "📝",
   "Visual Arts": "🎨",
   "Social Studies": "🌍",
@@ -270,17 +271,20 @@ function buildGameCardView(game) {
 }
 
 function buildGameCardLink(game) {
+  const guideDoc =
+    (typeof GAME_DETAIL_GUIDE !== "undefined" && GAME_DETAIL_GUIDE) ||
+    (typeof GAME_DETAIL_PDF !== "undefined" && GAME_DETAIL_PDF);
+
   if (
-    typeof GAME_DETAIL_PDF !== "undefined" &&
+    guideDoc &&
     typeof GAME_PDF_ANCHORS !== "undefined" &&
-    GAME_DETAIL_PDF &&
     Object.prototype.hasOwnProperty.call(GAME_PDF_ANCHORS, game.id)
   ) {
     const { search, page } = GAME_PDF_ANCHORS[game.id];
     const query = new URLSearchParams({ search });
     if (page) query.set("page", String(page));
     return {
-      url: `./pdf viewer/pdf-viewer.html?${query.toString()}`,
+      url: `./doc viewer/guide-viewer.html?${query.toString()}`,
       label: `Open full guide for ${game.name} in a new tab`,
     };
   }
@@ -359,7 +363,9 @@ function renderGameCard(game, tint) {
 }
 
 function renderCardImage(game) {
-  const imageUrl = bggImages.get(String(game.bggId));
+  const localCover =
+    typeof GAME_COVERS !== "undefined" ? GAME_COVERS[game.id] : null;
+  const imageUrl = localCover || bggImages.get(String(game.bggId));
   const emoji = getGameEmoji(game);
 
   if (imageUrl) {

@@ -1,0 +1,98 @@
+.guide-viewer-page {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background, oklch(0.97 0.02 85));
+}
+
+.guide-viewer__toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--border, oklch(0.9 0.02 85));
+  background: color-mix(in oklch, var(--card, white) 92%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.guide-viewer__status {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--muted-foreground, oklch(0.45 0.03 85));
+}
+
+.guide-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.game-guide__doc {
+  width: min(100%, 52rem);
+  padding: 2rem 2.25rem;
+  border-radius: 0.75rem;
+  background: white;
+  box-shadow: 0 8px 32px oklch(0.4 0.04 85 / 0.12);
+  color: var(--foreground, oklch(0.25 0.03 85));
+  line-height: 1.65;
+}
+
+.game-guide__report-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display, "DM Sans", sans-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+.game-guide__doc h2 {
+  margin: 2.5rem 0 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border, oklch(0.9 0.02 85));
+  font-family: var(--font-display, "DM Sans", sans-serif);
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.25;
+  scroll-margin-top: 4.5rem;
+}
+
+.game-guide__doc h2:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.game-guide__title--match {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  background: oklch(0.85 0.16 85 / 0.55);
+  outline: 2px solid oklch(0.72 0.14 75);
+  animation: guide-highlight-pulse 1.2s ease-in-out 3;
+}
+
+.game-guide__doc h3 {
+  margin: 1.25rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--muted-foreground, oklch(0.45 0.03 85));
+}
+
+.game-guide__doc p {
+  margin: 0 0 0.85rem;
+}
+
+.game-guide__doc img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0.75rem 0;
+  border-radius: 0.5rem;
+}
+
+@keyframes guide-highlight-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}

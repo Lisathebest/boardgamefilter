@@ -89,7 +89,7 @@ const RESOURCE_CONTENT = {
         name: "Board Game Arena",
         url: "https://boardgamearena.com/",
         description: "Large catalog of officially licensed titles with turn enforcement — strong for structured remote play.",
-        tags: ["game-collection"],
+        tags: ["game-collection", "solo-board-game"],
       },
       {
         name: "Tabletopia",

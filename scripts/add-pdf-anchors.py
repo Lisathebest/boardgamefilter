@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
-"""Map games to PDF section titles for text-search navigation in pdf-viewer.html."""
+"""Map games to Word guide section titles for text-search navigation in guide-viewer.html."""
 
 from __future__ import annotations
 
 import json
 import re
 import sys
+import zipfile
 from pathlib import Path
-
-import fitz
+from xml.etree import ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-PDF_PATH = ROOT / "assets" / "Final_Board_Game_Report_V3.pdf"
+DOCX_PATH = ROOT / "assets" / "Final_Board_Game_Report_V3.docx"
 GAMES_DATA = ROOT / "gamesData.js"
-ANCHORS_JS = ROOT / "pdf viewer" / "gamePdfAnchors.js"
-REPORT_JSON = ROOT / "scripts" / "pdf-anchor-report.json"
+ANCHORS_JS = ROOT / "doc viewer" / "gamePdfAnchors.js"
+REPORT_PATH = ROOT / "scripts" / "pdf-anchor-report.json"
+
+W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+SKIP_TITLES = {
+    "Visuals (Components & Gameplay)",
+    "Visuals (Components C Gameplay)",
+    "Community Comments",
+}
 
 
 def norm(text: str) -> str:
@@ -43,51 +50,55 @@ def search_patterns(name: str) -> list[str]:
     return patterns
 
 
-def find_pdf_title_positions(doc: fitz.Document) -> dict[str, list[dict]]:
-    positions: dict[str, list[dict]] = {}
-    for page_num in range(doc.page_count):
-        page = doc[page_num]
-        blocks = page.get_text("dict")["blocks"]
-        lines: list[tuple[str, float, float]] = []
-        for block in blocks:
-            if block.get("type") != 0:
-                continue
-            for line in block["lines"]:
-                text = "".join(span["text"] for span in line["spans"]).strip()
-                if not text:
-                    continue
-                y0 = line["bbox"][1]
-                pdf_y = page.rect.height - y0
-                lines.append((text, y0, pdf_y))
+def read_docx_paragraphs(docx_path: Path) -> list[str]:
+    with zipfile.ZipFile(docx_path) as archive:
+        root = ET.fromstring(archive.read("word/document.xml"))
 
-        for index, (text, y0, pdf_y) in enumerate(lines):
-            if text != "Description" or index == 0:
-                continue
-            title, title_y0, title_pdf_y = lines[index - 1]
-            if title in ("Visuals (Components & Gameplay)", "Community Comments"):
-                continue
-            positions.setdefault(norm(title), []).append(
-                {
-                    "title": title,
-                    "page": page_num,
-                    "y0": title_y0,
-                    "pdf_y": title_pdf_y,
-                }
-            )
+    paragraphs: list[str] = []
+    for paragraph in root.findall(f".//{{{W_NS}}}p"):
+        text = "".join(node.text or "" for node in paragraph.findall(f".//{{{W_NS}}}t")).strip()
+        if text:
+            paragraphs.append(text)
+    return paragraphs
+
+
+def find_guide_title_positions(paragraphs: list[str]) -> dict[str, list[dict]]:
+    positions: dict[str, list[dict]] = {}
+    section = 0
+
+    for index, text in enumerate(paragraphs):
+        if text != "Description" or index == 0:
+            continue
+
+        title = paragraphs[index - 1]
+        if title in SKIP_TITLES:
+            continue
+
+        section += 1
+        positions.setdefault(norm(title), []).append(
+            {
+                "title": title,
+                "section": section,
+                "paragraph_index": index - 1,
+            }
+        )
+
     return positions
 
 
-def match_games(games: list[dict], positions: dict[str, list[dict]]) -> tuple[list[dict], list[dict]]:
+def match_games(
+    games: list[dict], positions: dict[str, list[dict]]
+) -> tuple[list[dict], list[dict]]:
     matched: list[dict] = []
     unmatched: list[dict] = []
 
     for game in games:
         hit = None
-        pdf_title = game.get("detailPdfTitle")
-        if pdf_title:
-            key = norm(pdf_title)
+        guide_title = game.get("detailPdfTitle") or game.get("detailGuideTitle")
+        if guide_title:
+            key = norm(guide_title)
             if key in positions:
-                hit = {**positions[key][0], "matched_via": pdf_title}
+                hit = {**positions[key][0], "matched_via": guide_title}
 
         if not hit:
             for pattern in search_patterns(game["name"]):
@@ -101,10 +112,9 @@ def match_games(games: list[dict], positions: dict[str, list[dict]]) -> tuple[li
                 {
                     "id": game["id"],
                     "name": game["name"],
-                    "pdf_title": hit["title"],
-                    "page": hit["page"],
-                    "page_display": hit["page"] + 1,
-                    "pdf_y": hit["pdf_y"],
+                    "guide_title": hit["title"],
+                    "section": hit["section"],
+                    "paragraph_index": hit["paragraph_index"],
                 }
             )
         else:
@@ -116,44 +126,44 @@ def match_games(games: list[dict], positions: dict[str, list[dict]]) -> tuple[li
 def write_anchors_js(matches: list[dict]) -> None:
     entries = sorted(matches, key=lambda match: match["id"])
     body = ",\n  ".join(
-        f'"{match["id"]}": {{ search: {json.dumps(match["pdf_title"])}, page: {match["page_display"]} }}'
+        f'"{match["id"]}": {{ search: {json.dumps(match["guide_title"])}, page: {match["section"]} }}'
         for match in entries
     )
     ANCHORS_JS.write_text(
         "/** Auto-generated by scripts/add-pdf-anchors.py — do not edit by hand. */\n"
-        f'const GAME_DETAIL_PDF = "./assets/Final_Board_Game_Report_V3.pdf";\n'
+        f'const GAME_DETAIL_GUIDE = "./assets/Final_Board_Game_Report_V3.docx";\n'
         f"const GAME_PDF_ANCHORS = {{\n  {body}\n}};\n",
         encoding="utf-8",
     )
 
 
 def main() -> int:
-    if not PDF_PATH.exists():
-        print(f"Missing PDF: {PDF_PATH}", file=sys.stderr)
+    if not DOCX_PATH.exists():
+        print(f"Missing Word guide: {DOCX_PATH}", file=sys.stderr)
         return 1
 
     games = load_games()
-    doc = fitz.open(PDF_PATH)
-    positions = find_pdf_title_positions(doc)
-    doc.close()
-
+    paragraphs = read_docx_paragraphs(DOCX_PATH)
+    positions = find_guide_title_positions(paragraphs)
     matched, unmatched = match_games(games, positions)
     write_anchors_js(matched)
 
     report = {
-        "pdf": str(PDF_PATH.relative_to(ROOT)),
+        "guide": str(DOCX_PATH.relative_to(ROOT)),
+        "sections_found": len({entry["section"] for entries in positions.values() for entry in entries}),
         "matched": len(matched),
         "unmatched": unmatched,
         "matches": matched,
     }
-    REPORT_JSON.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    REPORT_PATH.write_text(json.dumps(report, indent=2), encoding="utf-8")
 
-    print(f"PDF text matches: {len(matched)}")
-    print(f"No PDF section: {len(unmatched)}")
+    print(f"Guide section matches: {len(matched)}")
+    print(f"No guide section: {len(unmatched)}")
     if unmatched:
         for item in unmatched:
             print(f"  - {item['id']}: {item['name']}")
     print(f"Wrote {ANCHORS_JS.relative_to(ROOT)}")
+    print("Tip: also run python3 scripts/build-guide-html.py after editing the Word file.")
     return 0
 
 
