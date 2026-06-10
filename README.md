@@ -183,7 +183,7 @@ Single-page view at `#/resources` with four sections. Data lives in `RESOURCE_CO
 - Dark `bg-slate-900`, gradient top stripe, 2 link columns (About / Contribute)
 - Links with empty `href` render as inactive `<span>` — configure in `FOOTER_COLUMNS`
 - Comments at top of file document intended URLs and owner notes (contact email, WeChat, form hints)
-- **Planned:** Common Sense–style brand intro column for "What is LudoMind?" (not implemented — remove from About links when added)
+- **Brand column:** `FOOTER_BRAND` in `footer.js` — "What is LudoMind?" blurb (left column); not a link list item
 - `The Pedagogy of Play` → `#/inspiration`
 - Report a Bug: prefer **Google Form** or **mailto** for teachers without GitHub (GitHub Issues requires login)
 
@@ -226,7 +226,6 @@ open index.html               # file:// also works for in-app hash routing
 ### Not implemented (safe to build if user asks)
 
 - Game detail modal/page (`data-game-id` on cards is ready)
-- Footer brand intro column (Common Sense layout)
 - Footer link URLs (FAQ, Contact, forms, bug report)
 - Contact / suggestion forms
 - `targetStages` multiselect filter (user chose `minAge` filter instead)

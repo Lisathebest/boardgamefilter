@@ -990,6 +990,12 @@ body {
   box-shadow: var(--shadow-card);
 }
 
+.game-card--link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
 .game-card__image {
   position: relative;
   height: 12rem;
@@ -1325,6 +1331,17 @@ body {
   .newsletter__art {
     display: block;
   }
+}
+
+/* Footer contact QR */
+.footer-contact__qr {
+  display: block;
+  width: 7rem;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklch, var(--border) 40%, #475569);
+  background: white;
+  padding: 0.25rem;
 }
 
 @media (max-width: 640px) {

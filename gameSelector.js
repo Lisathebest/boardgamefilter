@@ -269,21 +269,58 @@ function buildGameCardView(game) {
   return { subjects, softSkills, targetsSummary, tagsAriaLabel };
 }
 
+function buildGameCardLink(game) {
+  if (
+    typeof GAME_DETAIL_PDF !== "undefined" &&
+    typeof GAME_PDF_ANCHOR_IDS !== "undefined" &&
+    GAME_DETAIL_PDF &&
+    GAME_PDF_ANCHOR_IDS.has(game.id)
+  ) {
+    const anchor = game.detailAnchor ?? game.id;
+    return {
+      url: `${GAME_DETAIL_PDF}#nameddest=${encodeURIComponent(anchor)}`,
+      label: `Open full guide for ${game.name} in a new tab`,
+    };
+  }
+
+  const bggId = game.bggId != null ? String(game.bggId).trim() : "";
+  if (bggId) {
+    return {
+      url: `https://boardgamegeek.com/boardgame/${encodeURIComponent(bggId)}`,
+      label: `Open ${game.name} on BoardGameGeek in a new tab`,
+    };
+  }
+
+  return null;
+}
+
 function renderGameCard(game, tint) {
   const view = buildGameCardView(game);
+  const cardLink = buildGameCardLink(game);
 
   const targetsLine = view.targetsSummary
     ? `<p class="game-card__targets"><span class="game-card__targets-label">Targets:</span> ${escapeHtml(view.targetsSummary)}</p>`
     : "";
 
-  return `
-    <article
+  const cardOpen = cardLink
+    ? `<a
+      href="${escapeHtml(cardLink.url)}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="game-card game-card--link"
+      data-game-id="${escapeHtml(game.id)}"
+      aria-label="${escapeHtml(cardLink.label)}"
+    >`
+    : `<article
       class="game-card"
       data-game-id="${escapeHtml(game.id)}"
       tabindex="0"
       role="button"
       aria-label="${escapeHtml(game.name)}. ${escapeHtml(game.pedagogicalTrait)}."
-    >
+    >`;
+
+  return `
+    ${cardOpen}
       <div class="game-card__image game-card__image--${tint}">
         ${renderCardImage(game)}
       </div>
@@ -307,7 +344,7 @@ function renderGameCard(game, tint) {
         </div>
         ${targetsLine}
       </div>
-    </article>
+    ${cardLink ? "</a>" : "</article>"}
   `;
 }
 

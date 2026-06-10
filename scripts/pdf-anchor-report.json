@@ -1,0 +1,382 @@
+{
+  "pdf": "assets/Final_Board_Game_Report_V3.pdf",
+  "matched": 34,
+  "unmatched": [
+    {
+      "id": "sense-series",
+      "name": "Sense Series"
+    },
+    {
+      "id": "clumsy-thief-jr",
+      "name": "Clumsy Thief Jr."
+    },
+    {
+      "id": "heureka",
+      "name": "Heureka"
+    },
+    {
+      "id": "shadow-block",
+      "name": "Shadow Block"
+    },
+    {
+      "id": "acornism",
+      "name": "Acornism"
+    },
+    {
+      "id": "yin-shi-zuo-hua",
+      "name": "\u541f\u8bd7\u4f5c\u753b (Composing Poems and Painting)"
+    },
+    {
+      "id": "duplik",
+      "name": "Duplik"
+    },
+    {
+      "id": "lift-it",
+      "name": "Lift It! (\u4e24\u4eba\u4e09\u7b51)"
+    },
+    {
+      "id": "knockout",
+      "name": "Knockout"
+    },
+    {
+      "id": "toddles-bobbles",
+      "name": "Toddles-Bobbles"
+    },
+    {
+      "id": "foxy",
+      "name": "Foxy"
+    },
+    {
+      "id": "cheating-moth",
+      "name": "Cheating Moth"
+    },
+    {
+      "id": "moos-code",
+      "name": "Moo's Code"
+    },
+    {
+      "id": "chicken-cha-cha-cha",
+      "name": "Chicken Cha Cha Cha"
+    },
+    {
+      "id": "pixblocks",
+      "name": "PixBlocks"
+    },
+    {
+      "id": "break-the-cube",
+      "name": "Break the Cube"
+    },
+    {
+      "id": "cockroach-poker",
+      "name": "Cockroach Poker"
+    },
+    {
+      "id": "feelinks",
+      "name": "Feelinks"
+    },
+    {
+      "id": "24-hour-doctor",
+      "name": "24 \u5c0f\u65f6\u533b\u751f (24-Hour Doctor) / \u706b\u7ebf\u6025\u6551\u5ba4"
+    },
+    {
+      "id": "robot-turtles",
+      "name": "Robot Turtles"
+    },
+    {
+      "id": "kayanak",
+      "name": "Kayanak"
+    },
+    {
+      "id": "grab-your-breakfast",
+      "name": "Grab Your Breakfast"
+    },
+    {
+      "id": "catan-oil-springs",
+      "name": "Catan: Oil Springs"
+    },
+    {
+      "id": "forbidden-island",
+      "name": "Forbidden Island"
+    },
+    {
+      "id": "jenga",
+      "name": "Jenga"
+    },
+    {
+      "id": "anomia",
+      "name": "Anomia"
+    },
+    {
+      "id": "rorys-story-cubes",
+      "name": "Rory's Story Cubes"
+    },
+    {
+      "id": "snake-oil",
+      "name": "Snake Oil"
+    },
+    {
+      "id": "global-warming",
+      "name": "Global Warming"
+    },
+    {
+      "id": "ecosystem",
+      "name": "Ecosystem"
+    },
+    {
+      "id": "keep-cool",
+      "name": "Keep Cool"
+    },
+    {
+      "id": "photosynthesis",
+      "name": "Photosynthesis"
+    },
+    {
+      "id": "similo-animals",
+      "name": "Similo: Animals"
+    },
+    {
+      "id": "terraforming-mars",
+      "name": "Terraforming Mars"
+    }
+  ],
+  "matches": [
+    {
+      "id": "men-at-work",
+      "name": "Men at Work",
+      "pdf_title": "Men at Work",
+      "page": 0,
+      "pdf_y": 582.4246215820312
+    },
+    {
+      "id": "junk-art",
+      "name": "Junk Art",
+      "pdf_title": "Junk Art",
+      "page": 1,
+      "pdf_y": 631.1735229492188
+    },
+    {
+      "id": "cake-stack",
+      "name": "Cake Stack",
+      "pdf_title": "Cake Stack",
+      "page": 2,
+      "pdf_y": 667.1727294921875
+    },
+    {
+      "id": "stick-stack",
+      "name": "Stick Stack",
+      "pdf_title": "Stick Stack",
+      "page": 2,
+      "pdf_y": 181.183837890625
+    },
+    {
+      "id": "katamino",
+      "name": "Katamino",
+      "pdf_title": "Katamino",
+      "page": 4,
+      "pdf_y": 635.67333984375
+    },
+    {
+      "id": "rhino-hero",
+      "name": "Rhino Hero",
+      "pdf_title": "Rhino Hero",
+      "page": 5,
+      "pdf_y": 739.921142578125
+    },
+    {
+      "id": "yubibo",
+      "name": "Yubibo (Finger Balance)",
+      "pdf_title": "Yubibo (Finger Balance)",
+      "page": 5,
+      "pdf_y": 269.681884765625
+    },
+    {
+      "id": "things-in-rings",
+      "name": "Things in Rings",
+      "pdf_title": "Things in Rings",
+      "page": 6,
+      "pdf_y": 234.432373046875
+    },
+    {
+      "id": "dixit",
+      "name": "Dixit",
+      "pdf_title": "Dixit",
+      "page": 32,
+      "pdf_y": 263.681396484375
+    },
+    {
+      "id": "zingo",
+      "name": "Zingo!",
+      "pdf_title": "Zingo!",
+      "page": 7,
+      "pdf_y": 305.680908203125
+    },
+    {
+      "id": "sleeping-queens",
+      "name": "Sleeping Queens",
+      "pdf_title": "Sleeping Queens",
+      "page": 8,
+      "pdf_y": 433.177978515625
+    },
+    {
+      "id": "left-center-right",
+      "name": "LCR (Left Center Right)",
+      "pdf_title": "LCR (Left Center Right)",
+      "page": 9,
+      "pdf_y": 572.675537109375
+    },
+    {
+      "id": "clumsy-thief",
+      "name": "Clumsy Thief",
+      "pdf_title": "Clumsy Thief",
+      "page": 9,
+      "pdf_y": 149.685302734375
+    },
+    {
+      "id": "rummikub",
+      "name": "Rummikub",
+      "pdf_title": "Rummikub",
+      "page": 10,
+      "pdf_y": 292.181396484375
+    },
+    {
+      "id": "even-stevens-odd",
+      "name": "Even Steven's Odd",
+      "pdf_title": "Even Steven\u2019s Odd",
+      "page": 11,
+      "pdf_y": 385.178955078125
+    },
+    {
+      "id": "froggy-fractions",
+      "name": "Froggy Fractions",
+      "pdf_title": "Froggy Fractions",
+      "page": 12,
+      "pdf_y": 645.422607421875
+    },
+    {
+      "id": "spinderella",
+      "name": "Spinderella",
+      "pdf_title": "Spinderella",
+      "page": 13,
+      "pdf_y": 691.171630859375
+    },
+    {
+      "id": "ubongo-3d",
+      "name": "Ubongo 3D",
+      "pdf_title": "Ubongo 3D",
+      "page": 14,
+      "pdf_y": 739.920654296875
+    },
+    {
+      "id": "no-thanks",
+      "name": "No Thanks!",
+      "pdf_title": "No Thanks!",
+      "page": 14,
+      "pdf_y": 269.681396484375
+    },
+    {
+      "id": "planet",
+      "name": "My First Planet (Planet)",
+      "pdf_title": "Planet",
+      "page": 15,
+      "pdf_y": 409.178466796875
+    },
+    {
+      "id": "animals-of-the-world",
+      "name": "Animals of the World",
+      "pdf_title": "Animals of the World",
+      "page": 16,
+      "pdf_y": 454.927490234375
+    },
+    {
+      "id": "timeline",
+      "name": "Timeline",
+      "pdf_title": "Timeline",
+      "page": 17,
+      "pdf_y": 667.922607421875
+    },
+    {
+      "id": "very-silly-sentences",
+      "name": "Very Silly Sentences",
+      "pdf_title": "Very Silly Sentences",
+      "page": 18,
+      "pdf_y": 739.922607421875
+    },
+    {
+      "id": "happy-hats",
+      "name": "Happy Hats",
+      "pdf_title": "Happy Hats",
+      "page": 18,
+      "pdf_y": 138.436279296875
+    },
+    {
+      "id": "mice-and-cheese",
+      "name": "Mice and Cheese (Mucks M\u00e4uschen Still)",
+      "pdf_title": "Mice and Cheese",
+      "page": 19,
+      "pdf_y": 392.678466796875
+    },
+    {
+      "id": "tall-tale",
+      "name": "Tall Tale",
+      "pdf_title": "Tall Tale",
+      "page": 20,
+      "pdf_y": 352.180419921875
+    },
+    {
+      "id": "cooking-up-sentences",
+      "name": "Cooking up Sentences",
+      "pdf_title": "Cooking up Sentences",
+      "page": 21,
+      "pdf_y": 442.927490234375
+    },
+    {
+      "id": "taco-cat-goat-cheese-pizza",
+      "name": "Taco Cat Goat Cheese Pizza",
+      "pdf_title": "Taco Cat Goat Cheese Pizza",
+      "page": 22,
+      "pdf_y": 739.920654296875
+    },
+    {
+      "id": "once-upon-a-time",
+      "name": "Once Upon a Time",
+      "pdf_title": "Once Upon a Time",
+      "page": 23,
+      "pdf_y": 676.921630859375
+    },
+    {
+      "id": "set",
+      "name": "Set",
+      "pdf_title": "Set",
+      "page": 24,
+      "pdf_y": 739.919677734375
+    },
+    {
+      "id": "dobble",
+      "name": "Dobble (Spot It!)",
+      "pdf_title": "Dobble (Spot It!)",
+      "page": 24,
+      "pdf_y": 191.683349609375
+    },
+    {
+      "id": "ghost-blitz",
+      "name": "Ghost Blitz",
+      "pdf_title": "Ghost Blitz",
+      "page": 25,
+      "pdf_y": 232.933349609375
+    },
+    {
+      "id": "cabo",
+      "name": "Cabo",
+      "pdf_title": "Cabo",
+      "page": 26,
+      "pdf_y": 305.679443359375
+    },
+    {
+      "id": "exploding-kittens",
+      "name": "Exploding Kittens",
+      "pdf_title": "Exploding Kittens",
+      "page": 47,
+      "pdf_y": 526.927490234375
+    }
+  ]
+}
