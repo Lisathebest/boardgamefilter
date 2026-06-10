@@ -226,10 +226,10 @@ function formatTargetStagesSummary(stages) {
 }
 
 function summarizeTags(items, maxVisible = 2) {
-  if (!items?.length) return { visible: [], overflow: 0 };
+  if (!items?.length) return { visible: [], hidden: [], overflow: 0 };
   const visible = items.slice(0, maxVisible);
-  const overflow = Math.max(0, items.length - maxVisible);
-  return { visible, overflow };
+  const hidden = items.slice(maxVisible);
+  return { visible, hidden, overflow: hidden.length };
 }
 
 function escapeHtml(text) {
@@ -240,13 +240,22 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;");
 }
 
-function renderTagPills(items, variant, overflow = 0) {
+function renderTagPills(items, variant, hidden = []) {
   const pills = items.map(
     (label) => `<span class="tag tag--${variant}">${escapeHtml(label)}</span>`
   );
-  if (overflow > 0) {
+  if (hidden.length > 0) {
+    const hiddenPills = hidden
+      .map(
+        (label) =>
+          `<span class="tag tag--${variant} tag--tooltip">${escapeHtml(label)}</span>`
+      )
+      .join("");
     pills.push(
-      `<span class="tag tag--overflow" title="${overflow} more not shown">+${overflow}</span>`
+      `<span class="tag tag--overflow tag--has-tooltip" aria-label="Also: ${escapeHtml(hidden.join(", "))}">
+        +${hidden.length}
+        <span class="tag__tooltip" role="tooltip">${hiddenPills}</span>
+      </span>`
     );
   }
   return pills.join("");
@@ -353,8 +362,8 @@ function renderGameCard(game, tint) {
         </div>
         <div class="game-card__tags" aria-label="${escapeHtml(view.tagsAriaLabel)}">
           ${game.minAge != null ? `<span class="tag tag--age">${escapeHtml(game.minAge)}+</span>` : ""}
-          ${renderTagPills(view.subjects.visible, "filled", view.subjects.overflow)}
-          ${renderTagPills(view.softSkills.visible, "outline", view.softSkills.overflow)}
+          ${renderTagPills(view.subjects.visible, "filled", view.subjects.hidden)}
+          ${renderTagPills(view.softSkills.visible, "outline", view.softSkills.hidden)}
         </div>
         ${targetsLine}
       </div>

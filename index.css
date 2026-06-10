@@ -981,7 +981,7 @@ body {
   border-radius: var(--radius-card);
   border: 1px solid var(--border);
   background: var(--card);
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -1003,6 +1003,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: calc(var(--radius-card) - 1px) calc(var(--radius-card) - 1px) 0 0;
 }
 
 .game-card__image--peach { background: var(--peach); }
@@ -1072,6 +1073,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+  overflow: visible;
 }
 
 .game-card__title {
@@ -1111,6 +1113,7 @@ body {
   flex-wrap: wrap;
   gap: 0.35rem;
   margin-top: 0.125rem;
+  overflow: visible;
 }
 
 .tag--overflow {
@@ -1120,6 +1123,50 @@ body {
   font-weight: 600;
   font-size: 0.625rem;
   padding: 0.15rem 0.45rem;
+}
+
+.tag--has-tooltip {
+  position: relative;
+  cursor: help;
+}
+
+.tag--has-tooltip:hover {
+  z-index: 5;
+  border-color: color-mix(in oklch, var(--primary) 35%, var(--border));
+  color: var(--foreground);
+}
+
+.tag__tooltip {
+  position: absolute;
+  bottom: calc(100% + 0.35rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  width: max-content;
+  max-width: 11rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: var(--radius-popover);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.tag--has-tooltip:hover .tag__tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tag--tooltip {
+  font-size: 0.625rem;
+  padding: 0.15rem 0.45rem;
+  white-space: nowrap;
 }
 
 .game-card__targets {
