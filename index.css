@@ -138,9 +138,8 @@ body {
   z-index: 1;
 }
 
-#view-resources:not(.hidden) ~ #global-footer,
-#view-selector:not(.hidden) ~ #global-footer {
-  margin-top: 1.5rem;
+#global-footer {
+  margin-top: 1rem;
 }
 
 .resources-page .font-display {

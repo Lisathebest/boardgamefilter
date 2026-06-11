@@ -195,7 +195,7 @@ function renderPedagogyCard(section) {
 
 function renderInspiration(container) {
   container.innerHTML = `
-    <div class="inspiration-page mx-auto max-w-4xl px-6 pb-24 pt-10 md:pt-14">
+    <div class="inspiration-page mx-auto max-w-4xl px-6 pb-4 pt-10 md:pt-14">
       <header class="mb-12 text-center md:mb-16">
         <span class="mb-4 inline-block rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-indigo-700">Research & Pedagogy</span>
         <h1 class="font-display text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">Inspiration</h1>
