@@ -96,6 +96,65 @@ const PEDAGOGY_SECTIONS = [
   },
 ];
 
+const INSPIRATION_REFERENCES = [
+  "21st Century Skills and Competences for New Millennium Learners in OECD Countries. Vol. 41, OECD Education Working Papers no. 41, 18 Dec. 2009. OECD Education Working Papers. DOI.org (Crossref), https://doi.org/10.1787/218525261154.",
+  "Amaro, Salvatore, et al. “Kalèdo, a New Educational Board-Game, Gives Nutritional Rudiments and Encourages Healthy Eating in Children: A Pilot Cluster Randomized Trial.” European Journal of Pediatrics, vol. 165, no. 9, Sept. 2006, pp. 630–35. DOI.org (Crossref), https://doi.org/10.1007/s00431-006-0153-9.",
+  "Ashraf, Tayyaba. “Analysis of Social Responsibility Skills with Reference to Life Skills in Secondary School Curriculum.” Pakistan Social Sciences Review, vol. 5, no. IV, Dec. 2021, pp. 368–81. DOI.org (Crossref), https://doi.org/10.35484/pssr.2021(5-IV)29.",
+  "Bartfay, Wally J., and Emma Bartfay. “Promoting Health in Schools through a Board Game.” Western Journal of Nursing Research, vol. 16, no. 4, Aug. 1994, pp. 438–46. DOI.org (Crossref), https://doi.org/10.1177/019394599401600408.",
+  "Barton, Erin E., et al. “An Empirical Examination of Effective Practices for Teaching Board Game Play to Young Children.” Journal of Positive Behavior Interventions, vol. 20, no. 3, July 2018, pp. 138–48. DOI.org (Crossref), https://doi.org/10.1177/1098300717753833.",
+  "Bayeck, Rebecca Yvonne. “Examining Board Gameplay and Learning: A Multidisciplinary Review of Recent Research.” Simulation & Gaming, vol. 51, no. 4, Aug. 2020, pp. 411–31. DOI.org (Crossref), https://doi.org/10.1177/1046878119901286.",
+  "Brunscheen-Cartagena, Elizabeth, and K.-State Research. Bonding Thru Board Games: Developing Soft Skills.",
+  "Charifa, Prisyafandiafif, and Ima Apriliani. “Playing to Focus: A Systematic Review of Reveal-and-React Board and Card Games for Executive Function Development in Children.” Bulletin of Counseling and Psychotherapy, vol. 7, no. 2, July 2025. DOI.org (Crossref), https://doi.org/10.51214/002025071524000.",
+  "Chen, Fong-Han, and Shin-Jia Ho. “Designing a Board Game about the United Nations’ Sustainable Development Goals.” Sustainability, vol. 14, no. 18, Sept. 2022, p. 11197. DOI.org (Crossref), https://doi.org/10.3390/su141811197.",
+  "Crosta, Lucilla, et al. “21st Century Skills Development among Young Graduates: A European Perspective.” GiLE Journal of Skills Development, vol. 3, no. 1, Apr. 2023, pp. 40–56. DOI.org (Crossref), https://doi.org/10.52398/gjsd.2023.v3.i1.pp40-56.",
+  "De Blas-Zapata, Ana, et al. “Emerging Cardiovascular Risk Factors in Childhood and Adolescence: A Narrative Review.” European Journal of Pediatrics, vol. 184, no. 5, Apr. 2025, p. 298. DOI.org (Crossref), https://doi.org/10.1007/s00431-025-06102-y.",
+  "Eriksson, Malin, et al. “The Behavioral Effects of Cooperative and Competitive Board Games in Preschoolers.” Scandinavian Journal of Psychology, vol. 62, no. 3, June 2021, pp. 355–64. DOI.org (Crossref), https://doi.org/10.1111/sjop.12708.",
+  "Fjællingsdal, Kristoffer S., and Christian A. Klöckner. “Green Across the Board: Board Games as Tools for Dialogue and Simplified Environmental Communication.” Simulation & Gaming, vol. 51, no. 5, Oct. 2020, pp. 632–52. DOI.org (Crossref), https://doi.org/10.1177/1046878120925133.",
+  "González-Pérez, Laura Icela, and María Soledad Ramírez-Montoya. “Components of Education 4.0 in 21st Century Skills Frameworks: Systematic Review.” Sustainability, vol. 14, no. 3, Jan. 2022, p. 1493. DOI.org (Crossref), https://doi.org/10.3390/su14031493.",
+  "González-Salamanca, Juan Carlos, et al. “Key Competences, Education for Sustainable Development and Strategies for the Development of 21st Century Skills. A Systematic Literature Review.” Sustainability, vol. 12, no. 24, Dec. 2020, p. 10366. DOI.org (Crossref), https://doi.org/10.3390/su122410366.",
+  "Gonzalo-Iglesia, Juan Luis, et al. “Noneducational Board Games in University Education. Perceptions of Students Experiencing Game-Based Learning Methodologies.” Revista Lusófona de Educação, Nov. 2018, p. Vol. 41 No. 41 (2018): REVISTA LUSÓFONA DE EDUCAÇÃO. DOI.org (Datacite), https://doi.org/10.24140/ISSN.1645-7250.RLE41.03.",
+  "Heckman, James J., and Tim Kautz. “Hard Evidence on Soft Skills.” Labour Economics, vol. 19, no. 4, Aug. 2012, pp. 451–64. DOI.org (Crossref), https://doi.org/10.1016/j.labeco.2012.05.014.",
+  "McLennan, Marsh, and SK Group. The Global Risks Report 2021 16th Edition.",
+  "Noda, Shota, et al. “The Effectiveness of Intervention with Board Games: A Systematic Review.” BioPsychoSocial Medicine, vol. 13, no. 1, Dec. 2019, p. 22. DOI.org (Crossref), https://doi.org/10.1186/s13030-019-0164-1.",
+  "OECD. Skills That Matter for Success and Well-Being in Adulthood: Evidence on Adults’ Social and Emotional Skills from the 2023 Survey of Adult Skills. OECD Publishing, 2025. OECD Skills Studies. DOI.org (Crossref), https://doi.org/10.1787/6e318286-en.",
+  "Othman, Mohd Kamal, et al. “A Systematic Review of Paper‐based and Digital Board Games for Collaborative Science Learning.” Review of Education, vol. 13, no. 3, Dec. 2025, p. e70107. DOI.org (Crossref), https://doi.org/10.1002/rev3.70107.",
+  "Sousa, Carla, et al. “Playing at the School Table: Systematic Literature Review of Board, Tabletop, and Other Analog Game-Based Learning Approaches.” Frontiers in Psychology, vol. 14, June 2023, p. 1160591. DOI.org (Crossref), https://doi.org/10.3389/fpsyg.2023.1160591.",
+  "Tsai, Jen-Che, et al. “Using a Board Game to Teach about Sustainable Development.” Sustainability, vol. 13, no. 9, Apr. 2021, p. 4942. DOI.org (Crossref), https://doi.org/10.3390/su13094942.",
+];
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function linkifyReference(text) {
+  return escapeHtml(text).replace(
+    /(https?:\/\/[^\s,&]+)/g,
+    '<a href="$1" class="inspiration-references__link" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
+}
+
+function renderReferencesSection() {
+  const items = INSPIRATION_REFERENCES.map(
+    (ref) => `<li class="inspiration-references__item">${linkifyReference(ref)}</li>`
+  ).join("");
+
+  return `
+    <details class="inspiration-references">
+      <summary class="inspiration-references__summary">
+        <span class="inspiration-references__title">References</span>
+        <span class="inspiration-references__count">${INSPIRATION_REFERENCES.length} sources</span>
+      </summary>
+      <ol class="inspiration-references__list">
+        ${items}
+      </ol>
+    </details>
+  `;
+}
+
 const DIVERSE_LEARNERS = [
   {
     title: "Early Childhood & Preschool Development",
@@ -184,6 +243,8 @@ function renderInspiration(container) {
           ).join("")}
         </div>
       </article>
+
+      ${renderReferencesSection()}
     </div>
   `;
 }

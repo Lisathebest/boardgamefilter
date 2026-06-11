@@ -6,11 +6,8 @@ const NEWSLETTER_FORM_ACTION =
   "https://docs.google.com/forms/d/e/1FAIpQLScwSdYYDxSTcKIpVbA3P1ABNfH9B-VPGrbQ1K8YoR5i9M0yNA/formResponse";
 const NEWSLETTER_ENTRY_ID = "entry.415864406";
 
-function renderNewsletter() {
-  const mount = document.getElementById("newsletter-signup");
-  if (!mount) return;
-
-  mount.innerHTML = `
+function newsletterMarkup(prefix) {
+  return `
     <section class="newsletter" aria-label="Email updates">
       <div class="newsletter__inner">
         <div class="newsletter__copy">
@@ -20,11 +17,11 @@ function renderNewsletter() {
           </h2>
           <p class="newsletter__subtitle">We'll email new updates to you</p>
 
-          <form id="newsletter-form" class="newsletter__form" novalidate>
-            <label for="newsletter-email" class="newsletter__label">Add your email</label>
+          <form id="${prefix}-form" class="newsletter__form" novalidate>
+            <label for="${prefix}-email" class="newsletter__label">Add your email</label>
             <div class="newsletter__row">
               <input
-                id="newsletter-email"
+                id="${prefix}-email"
                 name="email"
                 type="email"
                 required
@@ -34,7 +31,7 @@ function renderNewsletter() {
               />
               <button type="submit" class="newsletter__btn">Get updates</button>
             </div>
-            <p id="newsletter-message" class="newsletter__message" role="status" hidden></p>
+            <p id="${prefix}-message" class="newsletter__message" role="status" hidden></p>
             <p class="newsletter__fine-print">*Opt out at any time</p>
           </form>
         </div>
@@ -70,15 +67,15 @@ async function submitNewsletterEmail(email) {
   });
 }
 
-function initNewsletter() {
-  renderNewsletter();
-
-  const form = document.getElementById("newsletter-form");
-  const input = document.getElementById("newsletter-email");
-  const message = document.getElementById("newsletter-message");
+function initNewsletterForm(prefix) {
+  const form = document.getElementById(`${prefix}-form`);
+  const input = document.getElementById(`${prefix}-email`);
+  const message = document.getElementById(`${prefix}-message`);
   const submitBtn = form?.querySelector(".newsletter__btn");
 
-  if (!form || !input || !message) return;
+  if (!form || !input || !message || form.dataset.newsletterInit) return;
+
+  form.dataset.newsletterInit = "true";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -115,4 +112,17 @@ function initNewsletter() {
       }
     }
   });
+}
+
+function mountNewsletter(mountId, prefix = "newsletter") {
+  const mount = document.getElementById(mountId);
+  if (!mount || mount.dataset.newsletterMounted) return;
+
+  mount.innerHTML = newsletterMarkup(prefix);
+  mount.dataset.newsletterMounted = "true";
+  initNewsletterForm(prefix);
+}
+
+function initNewsletter() {
+  mountNewsletter("newsletter-signup", "newsletter");
 }

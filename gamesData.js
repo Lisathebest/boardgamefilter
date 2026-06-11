@@ -400,7 +400,7 @@ const GAMES = [
     "players": "1-8",
     "duration": "30 min",
     "minAge": 8,
-    "targetStages": ["Upper Elementary", "Middle School", "High School"],
+    "targetStages": ["Pre-K"],
     "bggId": "223501"
   },
   {

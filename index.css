@@ -138,6 +138,11 @@ body {
   z-index: 1;
 }
 
+#view-resources:not(.hidden) ~ #global-footer,
+#view-selector:not(.hidden) ~ #global-footer {
+  margin-top: 1.5rem;
+}
+
 .resources-page .font-display {
   font-family: var(--font-display);
 }
@@ -695,6 +700,97 @@ body {
 
 .inspiration-page .font-display {
   font-family: var(--font-display);
+}
+
+.inspiration-references {
+  margin-top: 2.5rem;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--card) 92%, var(--muted));
+  box-shadow: var(--shadow-sm, 0 1px 2px oklch(0.2 0.02 280 / 0.06));
+}
+
+.inspiration-references__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.inspiration-references__summary::-webkit-details-marker {
+  display: none;
+}
+
+.inspiration-references__summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid var(--muted-foreground);
+  border-bottom: 2px solid var(--muted-foreground);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  margin-right: 0.15rem;
+}
+
+.inspiration-references[open] .inspiration-references__summary::after {
+  transform: rotate(-135deg);
+  margin-top: 0.25rem;
+}
+
+.inspiration-references__summary:hover {
+  background: color-mix(in oklch, var(--primary) 5%, var(--card));
+}
+
+.inspiration-references__title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.inspiration-references__count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  border-radius: 9999px;
+  border: 1px dashed var(--border);
+  padding: 0.2rem 0.55rem;
+  white-space: nowrap;
+}
+
+.inspiration-references__list {
+  margin: 0;
+  padding: 0 1.25rem 1.25rem 2rem;
+  border-top: 1px solid color-mix(in oklch, var(--border) 70%, transparent);
+}
+
+.inspiration-references__item {
+  padding: 0.65rem 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent);
+}
+
+.inspiration-references__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.inspiration-references__link {
+  color: color-mix(in oklch, var(--primary) 80%, var(--foreground));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+}
+
+.inspiration-references__link:hover {
+  color: var(--primary);
 }
 
 /* Hero */

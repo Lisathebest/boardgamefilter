@@ -479,7 +479,7 @@ function renderResourceSection(key) {
 
 function renderResources(container) {
   container.innerHTML = `
-    <div class="resources-page mx-auto max-w-6xl px-6 pb-24 pt-10 md:pt-14">
+    <div class="resources-page mx-auto max-w-6xl px-6 pb-6 pt-10 md:pt-14">
       <header class="mb-12 text-center md:mb-16">
         <span class="mb-4 inline-block rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-emerald-700">Curated Links</span>
         <h1 class="font-display text-3xl font-bold tracking-tight text-slate-900 md:text-5xl">Resources</h1>
@@ -502,8 +502,12 @@ function renderResources(container) {
       <article class="space-y-16">
         ${Object.keys(RESOURCE_CONTENT).map(renderResourceSection).join("")}
       </article>
+
+      <div id="newsletter-signup-resources"></div>
     </div>
   `;
+
+  mountNewsletter("newsletter-signup-resources", "newsletter-resources");
 
   Object.values(RESOURCE_CONTENT)
     .filter((section) => section.layout === "filtered-links" || section.layout === "filtered-cards")
