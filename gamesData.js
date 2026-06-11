@@ -302,7 +302,7 @@ const GAMES = [
   {
     "id": "acornism",
     "name": "Acornism",
-    "subjects": ["Math", "Biology"],
+    "subjects": ["Math"],
     "softSkills": ["Addition", "Abstract Strategy"],
     "pedagogicalTrait": "Spatial Number Matching",
     "researchNote": "Features cute artwork that masks a surprisingly deep and cutthroat strategic core centered around matching acorn numbers.",
