@@ -1516,6 +1516,35 @@ body {
   color: #94a3b8;
 }
 
+.footer-bottom {
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in oklch, var(--border) 30%, #475569);
+}
+
+.footer-bgg {
+  display: inline-flex;
+  transition: transform 0.15s ease;
+}
+
+.footer-bgg:hover {
+  transform: translateY(-1px);
+}
+
+.footer-bgg__badge {
+  display: inline-flex;
+  padding: 0.4rem 0.65rem;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.12);
+}
+
+.footer-bgg__logo {
+  display: block;
+  height: 2.25rem;
+  width: auto;
+  max-width: 11rem;
+}
+
 /* Footer contact QR */
 .footer-contact__qr {
   display: block;

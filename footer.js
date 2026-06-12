@@ -76,6 +76,29 @@ function renderFooterColumn(column) {
   `;
 }
 
+function renderFooterBggAttribution() {
+  return `
+    <a
+      href="https://boardgamegeek.com/"
+      class="footer-bgg"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Powered by BoardGameGeek — opens in new tab"
+    >
+      <span class="footer-bgg__badge">
+        <img
+          src="assets/BGGAPIlogo.jpg"
+          alt="Powered by BoardGameGeek"
+          class="footer-bgg__logo"
+          width="180"
+          height="45"
+          loading="lazy"
+        />
+      </span>
+    </a>
+  `;
+}
+
 function renderFooterContact() {
   return `
     <div id="contact">
@@ -122,9 +145,10 @@ function renderFooter() {
           TOP ⬆
         </button>
       </div>
-      <p class="mx-auto mt-10 max-w-6xl text-center text-xs text-slate-400">
-        LudoMind
-      </p>
+      <div class="footer-bottom mx-auto mt-10 flex max-w-6xl flex-col items-center gap-4">
+        ${renderFooterBggAttribution()}
+        <p class="text-center text-xs text-slate-400">LudoMind</p>
+      </div>
     </div>
   `;
 }
